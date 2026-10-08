@@ -1,0 +1,1615 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beauty Moment — Đặt lịch Nail</title>
+  <meta name="description" content="Web App đặt lịch và quản lý tiệm Nail/Beauty." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Beauty Moment - Trang chủ">
+      <img id="brandSalonLogo" class="brand-logo" src="assets/salon-owner-logo.svg" alt="Logo tiệm Beauty Moment" />
+      <span class="brand-copy"><strong id="brandSalonName">BEAUTY MOMENT</strong><small>Nail • Beauty • Relax</small></span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Điều hướng chính">
+      <span class="nav-intro-group">
+        <a id="navIntroBtn" class="nav-intro" href="#gioi-thieu" data-nav-key="customer-intro">Giới thiệu</a>
+        <button id="navIntroVoiceBtn" class="nav-intro-voice" type="button" aria-label="Nghe giới thiệu về tiệm" title="Nghe giới thiệu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6L8 10H4z"></path><path d="M16 9.5c1.2 1.3 1.2 3.7 0 5"></path><path d="M18.5 7c2.5 2.8 2.5 7.2 0 10"></path></svg>
+        </button>
+      </span>
+      <a id="navServiceBtn" class="nav-service" href="#dich-vu" data-nav-key="customer-services">Dịch vụ</a>
+      <a id="navPromoBtn" class="nav-promo" href="#uu-dai" data-nav-key="customer-promotions">Ưu đãi</a>
+      <a id="myScheduleNavBtn" class="nav-schedule" href="#lich-cua-toi" data-nav-key="customer-my-schedule">Lịch của tôi</a>
+      <a id="contactNavBtn" class="nav-contact" href="#lien-he" data-nav-key="customer-contact">Liên hệ</a>
+      <a id="staffExtraNavBtn" class="nav-staff-extra" href="#thong-bao-nhan-vien" data-nav-key="staff-notifications" hidden>Thông báo</a>
+    </nav>
+
+    <div class="account-actions">
+      <div id="notificationWrap" class="notification-wrap" hidden>
+        <button id="notificationBtn" class="notification-btn" type="button" aria-expanded="false" aria-label="Thông báo">
+          <svg class="notification-bell" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path>
+            <path d="M10 21h4"></path>
+          </svg>
+          <span id="notificationBadge" class="notification-badge" hidden>0</span>
+        </button>
+
+        <div id="notificationPanel" class="notification-panel" aria-hidden="true">
+          <div class="notification-panel-head">
+            <div>
+              <strong>Thông báo</strong>
+              <small id="notificationSummary">Chưa có thông báo mới</small>
+            </div>
+            <button id="markAllReadBtn" type="button">Đánh dấu đã đọc</button>
+          </div>
+          <div class="notification-tabs" role="tablist" aria-label="Phân loại thông báo">
+            <button id="notificationUnreadTab" class="notification-tab active" type="button" role="tab" aria-selected="true">
+              Chưa xem <span id="notificationUnreadCount">0</span>
+            </button>
+            <button id="notificationReadTab" class="notification-tab" type="button" role="tab" aria-selected="false">
+              Đã xem <span id="notificationReadCount">0</span>
+            </button>
+          </div>
+          <div id="notificationList" class="notification-list"></div>
+        </div>
+      </div>
+
+      <div class="login-wrap">
+      <button id="loginMenuBtn" class="login-main-btn" type="button" aria-expanded="false" aria-label="Đăng nhập hoặc mở tài khoản">
+        <span id="guestButtonContent" class="guest-button-content">
+          <span class="user-icon">♙</span>
+          <span>Đăng nhập</span>
+        </span>
+        <span id="profileButtonContent" class="profile-button-content" hidden>
+          <img id="profileAvatar" src="assets/nail-profile-avatar.png" alt="Ảnh mẫu nail" />
+          <span class="profile-copy">
+            <strong id="profileName">Khách hàng</strong>
+            <small id="profilePhone">0900 000 000</small>
+          </span>
+        </span>
+        <span class="chevron">⌄</span>
+      </button>
+
+      <div id="loginMenu" class="login-menu" aria-hidden="true">
+        <button type="button" data-role="Quản lý"><span>◈</span><div><strong>Quản lý</strong><small>Điều hành hoạt động tiệm</small></div></button>
+        <button type="button" data-role="Nhân viên"><span>✦</span><div><strong>Nhân viên</strong><small>Xem lịch và công việc</small></div></button>
+        <button type="button" data-role="Khách hàng"><span>♡</span><div><strong>Khách hàng</strong><small>Đặt lịch và xem ưu đãi</small></div></button>
+      </div>
+
+      <div id="profileMenu" class="profile-menu" aria-hidden="true">
+        <div class="profile-menu-head">
+          <img src="assets/nail-profile-avatar.png" alt="Ảnh mẫu nail" />
+          <div><strong id="profileMenuName">Khách hàng</strong><small id="profileMenuRole">Khách hàng</small></div>
+        </div>
+        <button id="profileInfoBtn" type="button"><span>♡</span><div><strong>Tài khoản của tôi</strong><small id="profileMenuPhone">0900 000 000</small></div></button>
+        <button id="logoutBtn" class="logout-btn" type="button"><span>↪</span><div><strong>Đăng xuất</strong><small>Trở về chế độ khách</small></div></button>
+      </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="managerConfigWorkspace" class="manager-config-workspace" hidden aria-label="Quản lý và cấu hình">
+    <div class="manager-config-shell">
+      <div class="manager-config-main">
+        <div class="manager-config-breadcrumb">TÀI KHOẢN QUẢN LÝ</div>
+        <h1>Quản lý &amp; cấu hình</h1>
+        <p class="manager-config-lead">Khu vực vận hành riêng của Chủ tiệm. Phần này sử dụng nền trắng, không dùng ảnh trang trí của giao diện Khách hàng.</p>
+
+        <section id="managerConfigPanelStaff" class="manager-config-panel manager-staff-panel is-active" data-manager-config-panel="staff">
+          <div class="manager-staff-panel-head">
+            <div class="manager-config-panel-icon">♙</div>
+            <div>
+              <small>NHÂN VIÊN</small>
+              <h2>Quản lý nhân viên</h2>
+              <p>Quản lý hồ sơ nhân viên, thâm niên làm việc và theo dõi chất lượng phục vụ dựa trên dữ liệu thực tế từ lịch khách hàng.</p>
+            </div>
+          </div>
+
+          <div class="manager-staff-actions">
+            <button id="staffApplicationLibraryBtn" class="staff-application-library-btn" type="button">
+              <span>▣</span>
+              <b>THƯ VIỆN HỒ SƠ XIN VIỆC</b>
+              <small>Xem, tải lên hoặc xóa hồ sơ</small>
+            </button>
+            <button id="addStaffRowBtn" class="staff-add-btn" type="button"><span>＋</span><b>THÊM NHÂN VIÊN</b></button>
+          </div>
+
+          <div class="manager-staff-table-wrap" role="region" aria-label="Bảng quản lý nhân viên" tabindex="0">
+            <table class="manager-staff-table">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>NHÂN VIÊN</th>
+                  <th>SĐT</th>
+                  <th>ĐỊA CHỈ</th>
+                  <th>NGÀY LV CHÍNH THỨC</th>
+                  <th>THỜI GIAN LÀM VIỆC</th>
+                  <th>THAO TÁC</th>
+                </tr>
+              </thead>
+              <tbody id="managerStaffTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="manager-rating-section">
+            <div class="manager-rating-section-head">
+              <div>
+                <small>BẢNG THEO DÕI THEO QUÝ</small>
+                <h3>Đánh giá chất lượng phục vụ</h3>
+                <p>Dữ liệu tự động đọc từ cột <b>NV PV</b> và <b>ĐÁNH GIÁ</b>. Bảng hiện tại chuyển sang quý mới vào <b>ngày thứ 5</b> của quý, nhưng vẫn tổng hợp dữ liệu bắt đầu từ ngày đầu quý.</p>
+              </div>
+              <div class="manager-rating-head-status">
+                <span id="managerRatingQuarterLabel" class="manager-rating-quarter-label">Đang xác định quý</span>
+                <span id="managerRatingSyncStatus" class="manager-rating-sync-status">Đang đồng bộ dữ liệu</span>
+              </div>
+            </div>
+            <div class="manager-staff-table-wrap" role="region" aria-label="Bảng theo dõi đánh giá chất lượng phục vụ" tabindex="0">
+              <table class="manager-rating-table">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>NHÂN VIÊN</th>
+                    <th>1 SAO<br><small>(rất kém)</small></th>
+                    <th>2 SAO<br><small>(kém)</small></th>
+                    <th>3 SAO<br><small>(bình thường)</small></th>
+                    <th>4 SAO<br><small>(tốt)</small></th>
+                    <th>5 SAO<br><small>(rất tốt)</small></th>
+                    <th>TỔNG SỐ PV</th>
+                    <th>ĐIỂM TB</th>
+                  </tr>
+                </thead>
+                <tbody id="managerStaffRatingBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="manager-rating-section manager-quarter-summary-section">
+            <div class="manager-rating-section-head">
+              <div>
+                <small>BẢNG TỔNG HỢP</small>
+                <h3>Theo dõi xếp loại chất lượng phục vụ từng quý</h3>
+                <p>Xếp loại được tính tự động từ <b>tổng số lượt phục vụ có đánh giá</b> và <b>điểm sao trung bình</b> trong từng quý. Quý đang diễn ra được hiển thị là <b>tạm tính</b>.</p>
+              </div>
+              <span id="quarterSummaryYear" class="manager-rating-quarter-label">Năm</span>
+            </div>
+            <div class="manager-staff-table-wrap" role="region" aria-label="Bảng tổng hợp xếp loại từng quý" tabindex="0">
+              <table class="manager-quarter-summary-table">
+                <thead>
+                  <tr>
+                    <th>STT</th>
+                    <th>NHÂN VIÊN</th>
+                    <th>QUÝ I</th>
+                    <th>QUÝ II</th>
+                    <th>QUÝ III</th>
+                    <th>QUÝ IV</th>
+                  </tr>
+                </thead>
+                <tbody id="managerQuarterSummaryBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="manager-rating-section manager-rating-criteria-section">
+            <div class="manager-rating-section-head">
+              <div>
+                <small>TIÊU CHÍ XẾP LOẠI</small>
+                <h3>Cấu hình tiêu chí đánh giá</h3>
+                <p>Bạn có thể sửa, thêm hoặc xóa tiêu chí. Nếu một Loại có nhiều dòng thì các dòng được hiểu là điều kiện <b>HOẶC</b>. Hệ thống ưu tiên xét theo thứ tự Loại 1 → Loại 2 → Loại 3.</p>
+              </div>
+              <button id="addRatingCriterionBtn" class="staff-add-btn rating-criterion-add-btn" type="button"><span>＋</span><b>THÊM TIÊU CHÍ</b></button>
+            </div>
+            <div class="manager-staff-table-wrap" role="region" aria-label="Bảng tiêu chí xếp loại" tabindex="0">
+              <table class="manager-rating-criteria-table">
+                <thead>
+                  <tr>
+                    <th>XẾP LOẠI</th>
+                    <th>≥ SỐ KHÁCH</th>
+                    <th>≥ SAO TRUNG BÌNH</th>
+                    <th>GHI CHÚ</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="managerRatingCriteriaBody"></tbody>
+              </table>
+            </div>
+            <p class="manager-rating-criteria-note">Ví dụ: “50 khách & từ 4 sao trở lên” được hiểu là có ít nhất 50 lượt phục vụ đã được khách đánh giá và điểm đánh giá trung bình của nhân viên trong quý đạt từ 4.0 sao.</p>
+          </div>
+        </section>
+
+        <section id="managerConfigPanelFinance" class="manager-config-panel manager-finance-panel" data-manager-config-panel="finance">
+          <div class="manager-finance-panel-head">
+            <div class="manager-config-panel-icon">₫</div>
+            <div>
+              <small>QUẢN LÝ TÀI CHÍNH</small>
+              <h2>Tài chính &amp; doanh thu</h2>
+            </div>
+          </div>
+
+          <nav class="manager-finance-subnav" aria-label="Menu quản lý tài chính">
+            <button class="manager-finance-subnav-btn is-active" type="button" data-manager-finance-menu="overview">TỔNG QUAN</button>
+            <button class="manager-finance-subnav-btn" type="button" data-manager-finance-menu="revenue">DOANH THU</button>
+            <button class="manager-finance-subnav-btn" type="button" data-manager-finance-menu="expenses">CHI PHÍ</button>
+            <button class="manager-finance-subnav-btn" type="button" data-manager-finance-menu="payroll">LƯƠNG &amp; HOA HỒNG</button>
+            <button class="manager-finance-subnav-btn" type="button" data-manager-finance-menu="cashbook">SỔ QUỸ</button>
+            <button class="manager-finance-subnav-btn" type="button" data-manager-finance-menu="services">HIỆU QUẢ DỊCH VỤ</button>
+            <button class="manager-finance-subnav-btn" type="button" data-manager-finance-menu="reports">BÁO CÁO</button>
+          </nav>
+
+          <div class="manager-finance-content" aria-live="polite">
+            <section class="manager-finance-view is-active" data-manager-finance-view="overview"></section>
+
+            <section class="manager-finance-view manager-revenue-view" data-manager-finance-view="revenue">
+              <div class="revenue-section revenue-daily-section">
+                <div class="revenue-section-head">
+                  <div>
+                    <small>THEO DÕI DOANH THU NGÀY CÁC DỊCH VỤ</small>
+                    <h3 id="revenueDailyTitle">THEO DÕI DOANH THU NGÀY CÁC DỊCH VỤ</h3>
+                    <p>Chỉ tính các lịch đã được Quản lý đánh dấu <b>Hoàn thành</b>. Doanh thu được ghi theo ngày phục vụ và giá được lưu tại chính lịch khách hàng.</p>
+                  </div>
+                  <div class="revenue-head-actions">
+                    <button id="revenueArchiveBtn" class="revenue-action-btn" type="button"><span>📁</span> THƯ MỤC</button>
+                    <button id="revenueViewAllBtn" class="revenue-action-btn revenue-action-primary" type="button">XEM TẤT CẢ</button>
+                  </div>
+                </div>
+                <div id="revenueDailyMeta" class="revenue-summary-strip"></div>
+                <div id="revenueDailyTableWrap" class="revenue-table-wrap" role="region" aria-label="Bảng doanh thu ngày" tabindex="0"></div>
+              </div>
+
+              <div class="revenue-section revenue-monthly-section">
+                <div class="revenue-section-head">
+                  <div>
+                    <small>THEO DÕI DOANH THU THÁNG CÁC DỊCH VỤ</small>
+                    <h3 id="revenueMonthlyTitle">THEO DÕI DOANH THU THÁNG CÁC DỊCH VỤ</h3>
+                    <p>Bảng này tự tổng hợp từ dữ liệu doanh thu theo ngày của từng tháng trong năm.</p>
+                  </div>
+                  <div class="revenue-head-actions">
+                    <button id="revenueMonthlyArchiveBtn" class="revenue-action-btn" type="button"><span>📁</span> THƯ MỤC</button>
+                    <button id="revenueMonthlyViewAllBtn" class="revenue-action-btn revenue-action-primary" type="button">XEM TẤT CẢ</button>
+                  </div>
+                </div>
+                <div id="revenueMonthlyTableWrap" class="revenue-table-wrap" role="region" aria-label="Bảng doanh thu tháng" tabindex="0"></div>
+              </div>
+
+              <div class="revenue-section revenue-yearly-section">
+                <div class="revenue-section-head">
+                  <div>
+                    <small>THEO DÕI DOANH THU NĂM CÁC DỊCH VỤ</small>
+                    <h3>THEO DÕI DOANH THU NĂM CÁC DỊCH VỤ</h3>
+                    <p>Bảng năm được cộng tự động từ toàn bộ các tháng đã có dữ liệu trong hệ thống. Khi sang năm mới, hệ thống tự thêm dòng năm tiếp theo.</p>
+                  </div>
+                </div>
+                <div id="revenueYearlyTableWrap" class="revenue-table-wrap" role="region" aria-label="Bảng doanh thu năm" tabindex="0"></div>
+              </div>
+
+              <div class="revenue-section revenue-service-usage-section">
+                <div class="revenue-section-head">
+                  <div>
+                    <small>THEO DÕI MỨC ĐỘ SỬ DỤNG DỊCH VỤ THEO THÁNG</small>
+                    <h3 id="serviceUsageTitle">DỊCH VỤ ĐƯỢC KHÁCH SỬ DỤNG NHIỀU NHẤT</h3>
+                    <p>Thuật toán đọc trực tiếp dữ liệu từ <b>Lịch khách hàng</b> và chỉ tính các lịch đã <b>Hoàn thành</b>. Mỗi lượt hoàn thành được tính là 1 lượt sử dụng dịch vụ.</p>
+                  </div>
+                </div>
+                <div id="serviceUsageMeta" class="revenue-summary-strip"></div>
+                <div id="serviceUsageTableWrap" class="revenue-table-wrap service-usage-table-wrap" role="region" aria-label="Bảng theo dõi mức độ sử dụng dịch vụ theo tháng" tabindex="0"></div>
+              </div>
+            </section>
+
+            <section class="manager-finance-view manager-expense-view" data-manager-finance-view="expenses">
+              <div class="expense-section expense-entry-section">
+                <div class="revenue-section-head">
+                  <div>
+                    <small>THEO DÕI CHI PHÍ</small>
+                    <h3>BẢNG THEO DÕI CHI PHÍ MUA SẮM VẬT TƯ &amp; VẬN HÀNH</h3>
+                    <p>Bạn nhập dữ liệu trực tiếp. <b>THÀNH TIỀN</b> được tính tự động = Số lượng × Đơn giá. Khi một dòng nhập đủ dữ liệu chính, hệ thống tự lưu và sinh thêm một dòng trắng ở cuối.</p>
+                  </div>
+                </div>
+                <div class="expense-filter-bar">
+                  <div class="expense-filter-copy">
+                    <small>BỘ LỌC NHÓM CHI PHÍ</small>
+                    <strong>Chọn một nhóm để chỉ xem các khoản chi thuộc nhóm đó.</strong>
+                  </div>
+                  <label class="expense-filter-control">
+                    <span>Nhóm chi phí</span>
+                    <select id="expenseFilterCategory" aria-label="Lọc theo nhóm chi phí"></select>
+                  </label>
+                  <button id="expenseFilterReset" class="expense-filter-reset" type="button">HIỂN THỊ TẤT CẢ</button>
+                </div>
+                <div id="expenseFilterStatus" class="expense-filter-status"></div>
+                <div id="expenseSummary" class="revenue-summary-strip"></div>
+                <div class="expense-table-wrap" role="region" aria-label="Bảng theo dõi chi phí" tabindex="0">
+                  <table class="expense-table">
+                    <thead><tr>
+                      <th>STT</th>
+                      <th>NGÀY THÁNG NĂM</th>
+                      <th>NHÓM CHI PHÍ</th>
+                      <th>THIẾT BỊ / DỤNG CỤ / VẬT TƯ</th>
+                      <th>SỐ LƯỢNG</th>
+                      <th>ĐƠN VỊ</th>
+                      <th>ĐƠN GIÁ</th>
+                      <th>THÀNH TIỀN</th>
+                      <th>PHƯƠNG THỨC</th>
+                      <th>GHI CHÚ</th>
+                      <th></th>
+                    </tr></thead>
+                    <tbody id="expenseTableBody"></tbody>
+                  </table>
+                </div>
+                <p class="expense-helper-note">Các khoản chi được lưu trong trình duyệt của hệ thống test. Có thể sửa trực tiếp từng ô; nút Xóa chỉ xóa khoản chi tương ứng.</p>
+              </div>
+
+              <div class="expense-section profit-table-section">
+                <div class="revenue-section-head">
+                  <div>
+                    <small>TỰ ĐỘNG TỔNG HỢP</small>
+                    <h3 id="profitMonthlyTitle">BẢNG THEO DÕI LỢI NHUẬN THEO THÁNG</h3>
+                    <p><b>Doanh thu</b> đọc từ các lịch khách hàng đã Hoàn thành. <b>Chi phí</b> cộng từ bảng phía trên. <b>Lợi nhuận tạm tính = Doanh thu − Chi phí</b>. Chưa tự động lấy từ module Lương &amp; hoa hồng cho tới khi module đó được hoàn thiện; nếu bạn nhập lương thủ công trong bảng Chi phí thì khoản đó vẫn được tính.</p>
+                  </div>
+                </div>
+                <div id="profitSummary" class="revenue-summary-strip"></div>
+                <div id="profitMonthlyTableWrap" class="revenue-table-wrap profit-table-wrap" role="region" aria-label="Bảng lợi nhuận theo tháng" tabindex="0"></div>
+              </div>
+
+              <div class="expense-section profit-chart-section">
+                <div class="revenue-section-head">
+                  <div>
+                    <small>BIỂU ĐỒ 12 THÁNG</small>
+                    <h3 id="profitChartTitle">DOANH THU • CHI PHÍ • LỢI NHUẬN</h3>
+                    <p>Biểu đồ giúp nhìn nhanh xu hướng 12 tháng. Số liệu vẫn do thuật toán cố định tính từ lịch Hoàn thành và bảng Chi phí, không dùng AI để đoán số tiền.</p>
+                  </div>
+                  <div class="revenue-head-actions">
+                    <button id="profitArchiveBtn" class="revenue-action-btn" type="button"><span>📁</span> THƯ MỤC</button>
+                    <button id="profitViewAllBtn" class="revenue-action-btn revenue-action-primary" type="button">XEM TẤT CẢ</button>
+                  </div>
+                </div>
+                <div id="profitChartMeta" class="revenue-summary-strip"></div>
+                <div id="profitChartWrap" class="profit-chart-wrap" role="img" aria-label="Biểu đồ doanh thu chi phí và lợi nhuận 12 tháng"></div>
+              </div>
+            </section>
+            <section class="manager-finance-view" data-manager-finance-view="payroll"></section>
+            <section class="manager-finance-view" data-manager-finance-view="cashbook"></section>
+            <section class="manager-finance-view" data-manager-finance-view="services"></section>
+            <section class="manager-finance-view" data-manager-finance-view="reports"></section>
+          </div>
+        </section>
+
+        <section id="managerConfigPanelCustomers" class="manager-config-panel manager-customer-panel" data-manager-config-panel="customers">
+          <div class="manager-customer-panel-head">
+            <div class="manager-config-panel-icon">♡</div>
+            <div>
+              <small>KHÁCH HÀNG</small>
+              <h2>Quản lý &amp; phân nhóm khách hàng</h2>
+              <p>Danh sách được tự tổng hợp từ tài khoản Khách hàng và <b>Lịch khách hàng</b>. Chỉ lịch đã <b>Hoàn thành</b> mới được tính vào số lần phục vụ, tổng chi tiêu và phân hạng.</p>
+            </div>
+          </div>
+
+          <div class="customer-crm-summary-grid">
+            <article><small>TỔNG KHÁCH</small><strong id="crmTotalCustomers">0</strong><span>Tài khoản/hồ sơ khách</span></article>
+            <article><small>KHÁCH MỚI THÁNG NÀY</small><strong id="crmNewCustomers">0</strong><span>Lần hoàn thành đầu tiên trong tháng</span></article>
+            <article><small>KHÁCH QUAY LẠI</small><strong id="crmReturningCustomers">0</strong><span>Từ 2 lần phục vụ trở lên</span></article>
+            <article class="tier-diamond"><small>KIM CƯƠNG</small><strong id="crmDiamondCustomers">0</strong><span>Theo tiêu chí 12 tháng gần nhất</span></article>
+            <article class="tier-gold"><small>VÀNG</small><strong id="crmGoldCustomers">0</strong><span>Theo tiêu chí 12 tháng gần nhất</span></article>
+            <article class="tier-silver"><small>BẠC</small><strong id="crmSilverCustomers">0</strong><span>Theo tiêu chí 12 tháng gần nhất</span></article>
+            <article class="needs-care"><small>CẦN CHĂM SÓC</small><strong id="crmNeedsCareCustomers">0</strong><span>Có đánh giá thấp/phản hồi tiêu cực gần đây</span></article>
+          </div>
+
+          <div class="customer-crm-toolbar">
+            <label class="customer-crm-search"><span>⌕</span><input id="crmCustomerSearch" type="search" placeholder="Tìm theo tên hoặc số điện thoại"></label>
+            <label><span>Nhóm khách</span><select id="crmBehaviorFilter"><option value="all">Tất cả</option><option value="new">Khách mới</option><option value="one">Khách 1 lần</option><option value="returning">Khách quay lại</option><option value="frequent">Khách thường xuyên</option><option value="dormant">Lâu chưa quay lại</option><option value="none">Chưa phát sinh</option></select></label>
+            <label><span>Hạng</span><select id="crmTierFilter"><option value="all">Tất cả hạng</option><option value="Kim cương">Kim cương</option><option value="Vàng">Vàng</option><option value="Bạc">Bạc</option><option value="Chưa xếp hạng">Chưa xếp hạng</option></select></label>
+            <label><span>Chăm sóc</span><select id="crmCareFilter"><option value="all">Tất cả</option><option value="care">Cần chăm sóc</option><option value="normal">Bình thường</option></select></label>
+            <label><span>Sắp xếp</span><select id="crmSortFilter"><option value="recent">Gần nhất</option><option value="spend">Chi tiêu cao nhất</option><option value="visits">Lượt phục vụ nhiều nhất</option><option value="name">Tên A–Z</option></select></label>
+            <button id="crmResetFilters" type="button">Xóa lọc</button>
+          </div>
+
+          <div id="crmTableStatus" class="customer-crm-table-status"></div>
+          <div class="customer-crm-table-wrap" role="region" aria-label="Danh sách khách hàng" tabindex="0">
+            <table class="customer-crm-table">
+              <thead><tr>
+                <th>STT</th><th>KHÁCH HÀNG</th><th>SĐT</th><th>LẦN ĐẦU</th><th>GẦN NHẤT</th><th>SỐ LẦN PV</th><th>TỔNG CHI</th><th>DV YÊU THÍCH</th><th>ĐIỂM TB</th><th>NHÓM KHÁCH</th><th>HẠNG</th><th>CHĂM SÓC</th>
+              </tr></thead>
+              <tbody id="managerCustomerTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="customer-tier-criteria-section">
+            <div class="manager-rating-section-head">
+              <div>
+                <small>TIÊU CHÍ HẠNG KHÁCH HÀNG</small>
+                <h3>Bạc • Vàng • Kim cương</h3>
+                <p>Phân hạng dùng dữ liệu <b>12 tháng gần nhất</b>. Bạn có thể thay đổi ngưỡng số lượt, tổng chi tiêu và số ngày tối đa kể từ lần gần nhất. Thuật toán luôn kiểm tra Kim cương → Vàng → Bạc.</p>
+              </div>
+              <button id="crmResetTierCriteria" class="secondary-btn" type="button">Khôi phục gợi ý</button>
+            </div>
+            <div class="customer-tier-table-wrap">
+              <table class="customer-tier-table">
+                <thead><tr><th>HẠNG</th><th>LƯỢT PV TỐI THIỂU</th><th>CHI TIÊU TỐI THIỂU</th><th>LẦN GẦN NHẤT ≤</th><th>GHI CHÚ</th></tr></thead>
+                <tbody id="customerTierCriteriaBody"></tbody>
+              </table>
+            </div>
+            <p class="customer-tier-note">Các điều kiện trong cùng một hạng được áp dụng theo kiểu <b>VÀ</b>. Khách chưa có lịch Hoàn thành sẽ chưa được xếp hạng.</p>
+          </div>
+        </section>
+
+        <section id="managerConfigPanelSettings" class="manager-config-panel" data-manager-config-panel="settings">
+          <div class="manager-config-panel-icon">⚙</div>
+          <div>
+            <small>CẤU HÌNH CÀI ĐẶT</small>
+            <h2>Cấu hình hệ thống</h2>
+            <p>Khu vực chuẩn bị cho giờ hoạt động, chính sách đặt/đổi/hủy lịch, quy tắc vận hành và các thiết lập dùng chung của tiệm.</p>
+          </div>
+        </section>
+      </div>
+
+      <aside class="manager-config-sidebar" aria-label="Menu quản lý và cấu hình">
+        <div class="manager-config-sidebar-title">QUẢN LÝ &amp; CẤU HÌNH</div>
+        <button class="manager-config-menu-btn is-active" type="button" data-manager-config-menu="staff"><span>♙</span><b>NHÂN VIÊN</b></button>
+        <button class="manager-config-menu-btn" type="button" data-manager-config-menu="customers"><span>♡</span><b>KHÁCH HÀNG</b></button>
+        <button class="manager-config-menu-btn" type="button" data-manager-config-menu="finance"><span>₫</span><b>QUẢN LÝ TÀI CHÍNH</b></button>
+        <button class="manager-config-menu-btn" type="button" data-manager-config-menu="settings"><span>⚙</span><b>CẤU HÌNH CÀI ĐẶT</b></button>
+      </aside>
+    </div>
+  </section>
+
+  <section id="staffWorkspace" class="staff-workspace" hidden aria-label="Không gian làm việc Nhân viên">
+    <div class="staff-workspace-shell">
+      <header class="staff-workspace-head">
+        <div>
+          <div class="staff-workspace-eyebrow">TÀI KHOẢN NHÂN VIÊN</div>
+          <h1 id="staffWorkspaceTitle">Tổng quan công việc</h1>
+          <p id="staffWorkspaceLead">Theo dõi lịch được phân công, quy trình dịch vụ và chất lượng phục vụ của riêng bạn.</p>
+        </div>
+        <div id="staffIdentityCard" class="staff-identity-card"></div>
+      </header>
+
+      <section class="staff-panel is-active" data-staff-panel="overview">
+        <div id="staffOverviewMetrics" class="staff-metric-grid"></div>
+        <div class="staff-overview-grid">
+          <article class="staff-work-card staff-next-card">
+            <div class="staff-section-title"><div><small>KHÁCH TIẾP THEO</small><h2>Lịch gần nhất của bạn</h2></div><span>◷</span></div>
+            <div id="staffNextAppointment"></div>
+          </article>
+          <article class="staff-work-card">
+            <div class="staff-section-title"><div><small>LỊCH ĐƯỢC PHÂN</small><h2>Hôm nay &amp; sắp tới</h2></div><span>🗓</span></div>
+            <div id="staffTodaySchedule" class="staff-mini-schedule"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="staff-panel" data-staff-panel="schedule">
+        <div class="staff-section-title staff-section-title-wide"><div><small>LỊCH CỦA TÔI</small><h2>Khách được phân công</h2><p>Chỉ hiển thị những lịch đang gắn với đúng hồ sơ nhân viên của bạn.</p></div><span>🗓</span></div>
+        <div id="staffScheduleSummary" class="staff-schedule-summary"></div>
+        <div id="staffScheduleList" class="staff-schedule-list"></div>
+      </section>
+
+      <section class="staff-panel" data-staff-panel="services">
+        <div class="staff-section-title staff-section-title-wide"><div><small>DỊCH VỤ &amp; QUY TRÌNH</small><h2>Sổ tay phục vụ</h2><p>Quy trình được đồng bộ trực tiếp từ cấu hình dịch vụ của Chủ tiệm.</p></div><span>✦</span></div>
+        <div id="staffServicesGrid" class="staff-services-grid"></div>
+      </section>
+
+      <section class="staff-panel" data-staff-panel="shifts">
+        <div class="staff-section-title staff-section-title-wide"><div><small>CA LÀM VIỆC</small><h2>Giờ hoạt động cần theo dõi</h2><p>Hiện tại ca cá nhân tham chiếu theo giờ mở tiệm và các ngoại lệ ngày mà Quản lý đã cập nhật.</p></div><span>◷</span></div>
+        <div id="staffShiftToday" class="staff-shift-today"></div>
+        <div id="staffShiftWeek" class="staff-shift-week"></div>
+      </section>
+
+      <section class="staff-panel" data-staff-panel="ratings">
+        <div class="staff-section-title staff-section-title-wide"><div><small>ĐÁNH GIÁ CỦA TÔI</small><h2>Chất lượng phục vụ</h2><p>Bạn chỉ xem được dữ liệu của chính mình. Nhân viên không thể chỉnh sửa đánh giá của khách.</p></div><span>★</span></div>
+        <div id="staffRatingSummary" class="staff-rating-summary"></div>
+        <div id="staffRatingDistribution" class="staff-rating-distribution"></div>
+        <div class="staff-feedback-head"><small>PHẢN HỒI LIÊN QUAN ĐẾN BẠN</small><h3>Ý kiến từ khách hàng</h3></div>
+        <div id="staffFeedbackList" class="staff-feedback-list"></div>
+      </section>
+
+      <section class="staff-panel" data-staff-panel="notifications">
+        <div class="staff-section-title staff-section-title-wide"><div><small>THÔNG BÁO</small><h2>Việc cần bạn chú ý</h2><p>Lịch mới được giao, thay đổi liên quan tới khách và thông tin vận hành dành riêng cho bạn.</p></div><span>🔔</span></div>
+        <div id="staffNotificationsSummary" class="staff-notification-summary"></div>
+        <div id="staffNotificationsList" class="staff-notification-list"></div>
+      </section>
+    </div>
+  </section>
+
+  <div id="customerProfileBackdrop" class="modal-backdrop customer-profile-backdrop" aria-hidden="true">
+    <section class="detail-modal customer-profile-modal" role="dialog" aria-modal="true" aria-labelledby="customerProfileTitle">
+      <button id="closeCustomerProfile" class="close-btn" type="button" aria-label="Đóng hồ sơ khách hàng">×</button>
+      <div class="detail-kicker"><span>♡</span><div><small>HỒ SƠ KHÁCH HÀNG</small><b id="customerProfileTierLabel">Chưa xếp hạng</b></div></div>
+      <div class="customer-profile-head">
+        <div><h2 id="customerProfileTitle">Khách hàng</h2><p id="customerProfileIdentity">—</p></div>
+        <button id="customerProfileSendPromo" class="primary-btn" type="button">Gửi ưu đãi riêng →</button>
+      </div>
+      <div id="customerProfileStats" class="customer-profile-stats"></div>
+      <div id="customerProfileCare" class="customer-profile-care" hidden></div>
+      <div class="customer-profile-history-head"><div><small>LỊCH SỬ PHỤC VỤ</small><h3>Lịch đã hoàn thành</h3></div></div>
+      <div id="customerProfileHistory" class="customer-profile-history"></div>
+      <div class="modal-bottom-actions"><button id="customerProfileCloseBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </section>
+  </div>
+
+  <div id="revenueArchiveBackdrop" class="modal-backdrop revenue-modal-backdrop" aria-hidden="true">
+    <div class="auth-modal revenue-modal revenue-archive-modal">
+      <button id="closeRevenueArchive" class="close-btn" type="button" aria-label="Đóng thư mục doanh thu">×</button>
+      <div class="detail-kicker"><span>📁</span><div><small>QUẢN LÝ TÀI CHÍNH</small><b>Thư mục doanh thu tháng cũ</b></div></div>
+      <h2>Thư mục lưu doanh thu theo tháng</h2>
+      <p class="auth-subtitle">Khi sang tháng mới, tháng trước sẽ tự xuất hiện trong thư mục này. Dữ liệu được dựng lại từ các lịch đã Hoàn thành nên không làm mất lịch sử gốc.</p>
+      <div id="revenueArchiveList" class="revenue-archive-list"></div>
+      <div class="modal-bottom-actions"><button id="revenueArchiveCloseBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </div>
+  </div>
+
+  <div id="revenueArchiveDetailBackdrop" class="modal-backdrop revenue-modal-backdrop" aria-hidden="true">
+    <div class="auth-modal revenue-modal revenue-archive-detail-modal">
+      <button id="closeRevenueArchiveDetail" class="close-btn" type="button" aria-label="Đóng chi tiết doanh thu tháng">×</button>
+      <div class="detail-kicker"><span>▦</span><div><small>DOANH THU THÁNG CŨ</small><b id="revenueArchiveDetailLabel">Chi tiết tháng</b></div></div>
+      <div id="revenueArchiveDetailContent" class="revenue-pdf-sheet"></div>
+      <div class="modal-bottom-actions"><button id="revenueArchiveDetailCloseBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </div>
+  </div>
+
+  <div id="revenueAllBackdrop" class="modal-backdrop revenue-modal-backdrop" aria-hidden="true">
+    <div class="auth-modal revenue-modal revenue-all-modal">
+      <button id="closeRevenueAll" class="close-btn" type="button" aria-label="Đóng báo cáo doanh thu đầy đủ">×</button>
+      <div class="detail-kicker"><span>▤</span><div><small>QUẢN LÝ TÀI CHÍNH</small><b>Xem tất cả doanh thu</b></div></div>
+      <div class="revenue-all-toolbar">
+        <div>
+          <h2>Danh sách doanh thu đầy đủ</h2>
+          <p>Hiển thị từ tháng đầu tiên có dữ liệu đến tháng hiện tại theo dạng trang báo cáo để lướt xem.</p>
+        </div>
+        <button id="revenuePrintPdfBtn" class="revenue-action-btn revenue-action-primary" type="button">IN / LƯU PDF</button>
+      </div>
+      <div id="revenueAllContent" class="revenue-all-content"></div>
+      <div class="modal-bottom-actions"><button id="revenueAllCloseBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </div>
+  </div>
+
+  <div id="revenueMonthlyArchiveBackdrop" class="modal-backdrop revenue-modal-backdrop" aria-hidden="true">
+    <div class="auth-modal revenue-modal revenue-archive-modal">
+      <button id="closeRevenueMonthlyArchive" class="close-btn" type="button" aria-label="Đóng thư mục tổng hợp doanh thu năm">×</button>
+      <div class="detail-kicker"><span>📁</span><div><small>DOANH THU THEO THÁNG</small><b>Thư mục các năm trước</b></div></div>
+      <h2>Thư mục tổng hợp doanh thu tháng theo năm</h2>
+      <p class="auth-subtitle">Khi sang năm mới, bảng 12 tháng của năm trước sẽ được lưu tại đây. Dữ liệu vẫn được dựng từ các lịch khách hàng đã Hoàn thành.</p>
+      <div id="revenueMonthlyArchiveList" class="revenue-archive-list"></div>
+      <div class="modal-bottom-actions"><button id="revenueMonthlyArchiveCloseBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </div>
+  </div>
+
+  <div id="revenueMonthlyArchiveDetailBackdrop" class="modal-backdrop revenue-modal-backdrop" aria-hidden="true">
+    <div class="auth-modal revenue-modal revenue-archive-detail-modal">
+      <button id="closeRevenueMonthlyArchiveDetail" class="close-btn" type="button" aria-label="Đóng chi tiết tổng hợp năm">×</button>
+      <div class="detail-kicker"><span>▦</span><div><small>DOANH THU THÁNG THEO NĂM</small><b id="revenueMonthlyArchiveDetailLabel">Chi tiết năm</b></div></div>
+      <div id="revenueMonthlyArchiveDetailContent" class="revenue-pdf-sheet"></div>
+      <div class="modal-bottom-actions"><button id="revenueMonthlyArchiveDetailCloseBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </div>
+  </div>
+
+  <div id="revenueMonthlyAllBackdrop" class="modal-backdrop revenue-modal-backdrop" aria-hidden="true">
+    <div class="auth-modal revenue-modal revenue-all-modal">
+      <button id="closeRevenueMonthlyAll" class="close-btn" type="button" aria-label="Đóng báo cáo doanh thu tháng đầy đủ">×</button>
+      <div class="detail-kicker"><span>▤</span><div><small>QUẢN LÝ TÀI CHÍNH</small><b>Xem tất cả doanh thu tháng</b></div></div>
+      <div class="revenue-all-toolbar">
+        <div>
+          <h2>Danh sách tổng hợp doanh thu tháng</h2>
+          <p>Mỗi năm là một trang gồm đủ 12 tháng để bạn lướt xem từ năm đầu tiên có dữ liệu đến năm hiện tại.</p>
+        </div>
+        <button id="revenueMonthlyPrintPdfBtn" class="revenue-action-btn revenue-action-primary" type="button">IN / LƯU PDF</button>
+      </div>
+      <div id="revenueMonthlyAllContent" class="revenue-all-content"></div>
+      <div class="modal-bottom-actions"><button id="revenueMonthlyAllCloseBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </div>
+  </div>
+
+  <div id="profitArchiveBackdrop" class="modal-backdrop revenue-modal-backdrop" aria-hidden="true">
+    <div class="auth-modal revenue-modal revenue-archive-modal">
+      <button id="closeProfitArchive" class="close-btn" type="button" aria-label="Đóng thư mục lợi nhuận">×</button>
+      <div class="detail-kicker"><span>📁</span><div><small>QUẢN LÝ TÀI CHÍNH</small><b>Thư mục biểu đồ lợi nhuận</b></div></div>
+      <h2>Biểu đồ các năm trước</h2>
+      <p class="auth-subtitle">Mỗi năm đã kết thúc được lưu thành một bản tổng hợp 12 tháng để tra cứu nhanh.</p>
+      <div id="profitArchiveList" class="revenue-archive-list"></div>
+      <div id="profitArchivePreview" class="profit-archive-preview"></div>
+      <div class="modal-bottom-actions"><button id="profitArchiveCloseBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </div>
+  </div>
+
+  <div id="profitAllBackdrop" class="modal-backdrop revenue-modal-backdrop" aria-hidden="true">
+    <div class="auth-modal revenue-modal revenue-all-modal">
+      <button id="closeProfitAll" class="close-btn" type="button" aria-label="Đóng xem tất cả biểu đồ lợi nhuận">×</button>
+      <div class="detail-kicker"><span>▤</span><div><small>QUẢN LÝ TÀI CHÍNH</small><b>Xem tất cả lợi nhuận</b></div></div>
+      <div class="revenue-all-toolbar">
+        <div><h2>Doanh thu • Chi phí • Lợi nhuận theo năm</h2><p>Hiển thị đầy đủ từng năm từ năm đầu tiên có dữ liệu đến năm hiện tại.</p></div>
+        <button id="profitPrintBtn" class="revenue-action-btn revenue-action-primary" type="button">IN / LƯU PDF</button>
+      </div>
+      <div id="profitAllContent" class="profit-all-content"></div>
+      <div class="modal-bottom-actions"><button id="profitAllCloseBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </div>
+  </div>
+
+  <div id="staffApplicationBackdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="auth-modal staff-application-modal">
+      <button id="closeStaffApplicationLibrary" class="close-btn" type="button" aria-label="Đóng thư viện hồ sơ">×</button>
+      <div class="detail-kicker"><span>▣</span><div><small>TÀI KHOẢN QUẢN LÝ</small><b>Thư viện hồ sơ xin việc</b></div></div>
+      <h2>Hồ sơ xin việc nhân viên</h2>
+      <p class="auth-subtitle">Lưu file hồ sơ ứng viên/nhân viên để tra cứu nhanh. Có thể tải thêm hồ sơ mới hoặc xóa hồ sơ khi không còn cần lưu.</p>
+
+      <form id="staffApplicationUploadForm" class="staff-application-upload-form">
+        <label>
+          <span>Nhân viên / ứng viên</span>
+          <select id="staffApplicationEmployeeSelect"></select>
+        </label>
+        <label class="staff-application-file-field">
+          <span>Chọn file hồ sơ</span>
+          <input id="staffApplicationFile" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp" />
+        </label>
+        <button class="submit-btn" type="submit">Tải hồ sơ lên <span>→</span></button>
+      </form>
+      <p id="staffApplicationMessage" class="form-message"></p>
+      <div id="staffApplicationList" class="staff-application-list"></div>
+    </div>
+  </div>
+
+  <div id="staffApplicationPreviewBackdrop" class="modal-backdrop staff-application-preview-backdrop" aria-hidden="true">
+    <div class="staff-application-preview-modal">
+      <button id="closeStaffApplicationPreview" class="close-btn" type="button" aria-label="Đóng xem hồ sơ">×</button>
+      <div class="detail-kicker"><span>▣</span><div><small>XEM TRỰC TIẾP</small><b id="staffApplicationPreviewPerson">Hồ sơ nhân viên</b></div></div>
+      <h2 id="staffApplicationPreviewTitle">Hồ sơ xin việc</h2>
+      <p id="staffApplicationPreviewMeta" class="auth-subtitle"></p>
+      <div id="staffApplicationPreviewViewer" class="staff-application-preview-viewer"></div>
+      <div class="staff-application-preview-actions">
+        <a id="staffApplicationPreviewDownload" class="submit-btn staff-preview-download" href="#" download>Tải xuống <span>→</span></a>
+        <button id="staffApplicationPreviewCloseBottom" class="ghost-btn" type="button">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="staffDeleteBackdrop" class="modal-backdrop staff-delete-backdrop" aria-hidden="true">
+    <section class="staff-delete-modal" role="dialog" aria-modal="true" aria-labelledby="staffDeleteTitle">
+      <button id="closeStaffDelete" class="close-btn" type="button" aria-label="Đóng xác nhận xóa nhân viên">×</button>
+      <div class="detail-kicker"><span>×</span><div><small>TÀI KHOẢN QUẢN LÝ</small><b>Xóa nhân viên</b></div></div>
+      <h2 id="staffDeleteTitle">Xóa nhân viên?</h2>
+      <p id="staffDeleteMessage" class="auth-subtitle">Nhân viên sẽ được loại khỏi hệ thống đang hoạt động.</p>
+      <div id="staffDeleteSummary" class="staff-delete-summary"></div>
+      <div class="staff-delete-warning">
+        <strong>Dữ liệu lịch sử được bảo toàn</strong>
+        <p>Các lịch đã Hoàn thành vẫn giữ tên nhân viên để doanh thu, hồ sơ khách và lịch sử phục vụ không bị sai. Các lịch chưa Hoàn thành sẽ tự bỏ gán nhân viên.</p>
+      </div>
+      <div class="staff-delete-actions">
+        <button id="cancelStaffDelete" class="ghost-btn" type="button">Hủy</button>
+        <button id="confirmStaffDelete" class="staff-delete-confirm-btn" type="button">Xóa nhân viên</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="ticker ticker-top" aria-label="Thông điệp Beauty Moment">
+    <div class="ticker-track">
+      <span class="ticker-msg tone-1">💅 Chào ngày mới với bộ móng xinh</span><i>♥</i>
+      <span class="ticker-msg tone-2">🎁 Đặt lịch online — tiết kiệm thời gian — ưu tiên phục vụ</span><i>✦</i>
+      <span class="ticker-msg tone-3">🌸 Mỗi bộ móng là một câu chuyện, kể phong cách của riêng bạn</span><i>♡</i>
+      <span class="ticker-msg tone-4">✨ Mỗi cuộc hẹn là một khoảnh khắc dành riêng cho bạn</span><i>✦</i>
+      <span class="ticker-msg tone-5">❤️ Đẹp hơn mỗi ngày — tự tin theo cách của bạn</span><i>♥</i>
+      <span class="ticker-msg tone-1">💅 Chào ngày mới với bộ móng xinh</span><i>♥</i>
+      <span class="ticker-msg tone-2">🎁 Đặt lịch online — tiết kiệm thời gian — ưu tiên phục vụ</span><i>✦</i>
+      <span class="ticker-msg tone-3">🌸 Mỗi bộ móng là một câu chuyện, kể phong cách của riêng bạn</span><i>♡</i>
+    </div>
+  </section>
+
+  <main>
+    <section id="gioi-thieu" class="hero">
+      <div class="hero-copy" id="dailyHeroCopy">
+        <p class="eyebrow" id="dailyHeroEyebrow">BEAUTY • CARE • MOMENT</p>
+        <h1 id="dailyHeroTitle"><span id="dailyHeroPrimary">Chủ động lịch hẹn,</span> <span id="dailyHeroAccent">tận hưởng vẻ đẹp.</span></h1>
+        <p class="lead" id="dailyHeroLead">Xem lịch trống, chọn dịch vụ và đặt lịch ngay trên điện thoại. Đến tiệm đúng giờ, không cần nhắn tin hỏi lịch, không phải chờ đợi lâu.</p>
+        <div class="hero-actions">
+          <button id="heroBookBtn" class="primary-btn" type="button">Đặt lịch ngay <span>→</span></button>
+          <a class="ghost-btn" href="#dich-vu">Khám phá dịch vụ</a>
+          <button id="managerPromotionHistoryBtn" class="ghost-btn manager-promo-history-btn" type="button" hidden>Chương trình khuyến mại</button>
+        </div>
+        <div class="hero-points">
+          <div><b>24/7</b><span>Đặt lịch online</span></div>
+          <div><b>Chủ động</b><span>Xem giờ còn trống</span></div>
+          <div><b>Nhẹ nhàng</b><span>Đến đúng giờ đã hẹn</span></div>
+        </div>
+      </div>
+
+      <div id="dailyHeroVisual" class="hero-visual daily-hero-frame frame-soft" aria-label="Hình ảnh nổi bật của tiệm">
+        <div class="photo-shell">
+          <img id="dailyHeroImage" src="assets/nail-real-hero.png" alt="Hình ảnh nổi bật của tiệm" />
+          <div class="photo-badge"><span>✦</span><div><b id="heroOpenHoursLabel">Giờ mở tiệm hôm nay</b><small id="heroOpenHoursText">08:00 – 21:00</small></div></div>
+        </div>
+        <div id="heroChipA" class="float-chip chip-a">♥ Nail Care</div>
+        <div id="heroChipB" class="float-chip chip-b">✦ Beauty • Relax</div>
+
+        <aside id="managerHeroTools" class="manager-hero-tools" hidden aria-label="Điều khiển ảnh và giờ mở tiệm">
+          <div class="manager-hero-tools-head"><strong>GIAO DIỆN TIỆM</strong><small>Chỉ Quản lý nhìn thấy</small></div>
+          <div class="manager-hero-tool-row">
+            <span>Tự đổi ảnh mỗi ngày</span>
+            <div class="hero-auto-toggle" role="group" aria-label="Bật tắt tự động đổi ảnh">
+              <button id="heroAutoOnBtn" type="button">ON</button>
+              <button id="heroAutoOffBtn" type="button">OFF</button>
+            </div>
+          </div>
+          <label class="manager-hero-upload">
+            <input id="managerHeroImageInput" type="file" accept="image/*" hidden />
+            <span>＋ Tải ảnh thật của tiệm</span>
+          </label>
+          <button id="managerHeroResetBtn" class="manager-hero-secondary" type="button">Dùng lại ảnh tự động</button>
+          <div class="manager-hours-editor">
+            <div><strong>GIỜ MỞ TIỆM THEO NGÀY</strong><small>Mặc định 08:00–21:00</small></div>
+            <label><span>Ngày</span><input id="managerHoursDate" type="date" /></label>
+            <div class="manager-hours-time-grid">
+              <label><span>Mở cửa</span><input id="managerHoursOpen" type="time" step="1800" /></label>
+              <label><span>Đóng cửa</span><input id="managerHoursClose" type="time" step="1800" /></label>
+            </div>
+            <div class="manager-hours-actions">
+              <button id="managerHoursSaveBtn" type="button">Lưu ngày này</button>
+              <button id="managerHoursDefaultBtn" type="button">Dùng mặc định</button>
+            </div>
+            <small id="managerHoursHint" class="manager-hours-hint">Chọn một ngày để thay đổi riêng, các ngày khác vẫn 08:00–21:00.</small>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="dich-vu" class="services section-pad">
+      <div class="section-title service-section-title service-title-slideshow-wrap">
+        <p class="eyebrow service-title-eyebrow">DỊCH VỤ NỔI BẬT</p>
+        <div class="beauty-slideshow" aria-label="Trình chiếu thông điệp làm đẹp nổi bật">
+          <article class="beauty-slide slide-1 is-visible">
+            <div class="slide-deco deco-flower-left">🌸</div>
+            <div class="slide-deco deco-petal">✦</div>
+            <div class="slide-copy left-layout">
+              <p class="slide-kicker">Beauty Moment</p>
+              <h2><em>Nuông chiều</em> bản thân hôm nay, <strong>tôn vinh</strong> nét đẹp riêng của bạn.</h2>
+              <p class="slide-sub">Mỗi dịch vụ là một khoảnh khắc dịu dàng dành riêng cho bạn.</p>
+            </div>
+          </article>
+
+          <article class="beauty-slide slide-2">
+            <div class="slide-frame"></div>
+            <div class="slide-copy center-layout">
+              <p class="slide-kicker">Beauty • Care • Relax</p>
+              <h2><strong>Tôn vinh</strong> nét đẹp riêng,<br><em>nuông chiều</em> cảm xúc của bạn.</h2>
+              <p class="slide-sub">Chăm sóc nhẹ nhàng để bạn thấy mình đẹp hơn mỗi ngày.</p>
+            </div>
+            <div class="slide-deco deco-heart">♡</div>
+          </article>
+
+          <article class="beauty-slide slide-3">
+            <div class="slide-copy split-layout">
+              <div class="script-line"><em>Nuông chiều</em></div>
+              <div class="body-line">bản thân hôm nay,</div>
+              <div class="accent-line"><strong>tôn vinh</strong> nét đẹp riêng của bạn.</div>
+            </div>
+            <div class="slide-deco deco-branch">❦</div>
+            <div class="slide-deco deco-blush"></div>
+          </article>
+
+          <article class="beauty-slide slide-4">
+            <div class="slide-copy right-layout">
+              <p class="slide-kicker">Dịu dàng • Tinh tế • Tỏa sáng</p>
+              <h2>Để mỗi lần làm đẹp là một lần bạn <em>yêu hơn</em> chính mình.</h2>
+              <p class="slide-sub">Khơi dậy thần thái nữ tính bằng những lựa chọn đẹp và dễ chạm tới.</p>
+            </div>
+            <div class="slide-deco deco-flower-right">🌺</div>
+            <div class="slide-deco deco-stars">✦ ✦</div>
+          </article>
+
+          <article class="beauty-slide slide-5">
+            <div class="slide-ribbon"></div>
+            <div class="slide-copy soft-layout">
+              <p class="slide-kicker">Dịch vụ nổi bật</p>
+              <h2><em>Nuông chiều</em> vẻ đẹp của bạn,<br>để sự tự tin nở rộ mỗi ngày.</h2>
+              <p class="slide-sub">Từ mái tóc đến bộ móng, mọi trải nghiệm đều xứng đáng được chăm chút.</p>
+            </div>
+            <div class="slide-deco deco-sparkle">✧</div>
+          </article>
+
+          <article class="beauty-slide slide-6">
+            <div class="slide-copy luxe-layout">
+              <p class="slide-kicker">Beauty Moment Signature</p>
+              <h2><strong>Đẹp hơn hôm nay,</strong> rạng rỡ hơn ngày mai.</h2>
+              <p class="slide-sub">Hãy chọn một dịch vụ yêu thích và dành cho bản thân chút yêu chiều xứng đáng.</p>
+            </div>
+            <div class="slide-deco deco-corner deco-corner-left"></div>
+            <div class="slide-deco deco-corner deco-corner-right"></div>
+          </article>
+
+          <div class="beauty-slide-indicators" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+      <div id="serviceCardsGrid" class="cards service-cards">
+        <article class="service-card" data-service-id="nail-care" role="button" tabindex="0" aria-label="Xem chi tiết dịch vụ Chăm sóc móng">
+          <span class="number">01</span>
+          <div class="round-icon">♡</div>
+          <img class="service-photo" src="assets/service-nail-care.png" alt="Dịch vụ chăm sóc móng với hình ảnh bàn tay được làm móng đẹp" />
+          <div class="service-copy">
+            <h3>Chăm sóc móng</h3>
+            <p>Làm sạch móng, chỉnh dáng, sơn gel và chăm chút vẻ đẹp cho đôi tay theo phong cách riêng.</p>
+            <button class="sample-btn-compact" type="button" data-open-nail-gallery>Mẫu móng</button>
+          </div>
+          <div class="service-meta">
+            <span><b>Giá dịch vụ</b><small>180.000đ</small></span>
+            <span><b>Thời gian</b><small>60 phút</small></span>
+          </div>
+        </article>
+
+        <article class="service-card service-card-featured" data-service-id="goi-duong-sinh" role="button" tabindex="0" aria-label="Xem chi tiết dịch vụ Gội đầu dưỡng sinh">
+          <span class="number">02</span>
+          <div class="round-icon">◌</div>
+          <img class="service-photo" src="assets/service-goi-duong-sinh.png" alt="Dịch vụ gội đầu dưỡng sinh với hình ảnh khách thư giãn tại salon" />
+          <div class="service-copy">
+            <h3 class="goi-service-title">Gội đầu dưỡng sinh</h3>
+            <p>Thư giãn da đầu, massage nhẹ nhàng, làm sạch tóc và giúp cơ thể phục hồi năng lượng sau ngày dài.</p>
+          </div>
+          <div class="service-meta">
+            <span><b>Giá dịch vụ</b><small>250.000đ</small></span>
+            <span><b>Thời gian</b><small>75 phút</small></span>
+          </div>
+        </article>
+
+        <article class="service-card" data-service-id="beauty-relax" role="button" tabindex="0" aria-label="Xem chi tiết dịch vụ Làm đẹp và thư giãn">
+          <span class="number">03</span>
+          <div class="round-icon">✦</div>
+          <img class="service-photo" src="assets/service-beauty-relax.png" alt="Dịch vụ làm đẹp và thư giãn với hình ảnh chăm sóc da trong không gian spa" />
+          <div class="service-copy">
+            <h3>Làm đẹp &amp; thư giãn</h3>
+            <p>Không gian chăm sóc nhẹ nhàng với các bước thư giãn và làm đẹp giúp bạn cảm thấy tươi tắn hơn.</p>
+          </div>
+          <div class="service-meta">
+            <span><b>Giá dịch vụ</b><small>320.000đ</small></span>
+            <span><b>Thời gian</b><small>90 phút</small></span>
+          </div>
+        </article>
+
+        <button id="managerAddServiceCard" class="service-add-card" type="button" hidden>
+          <span class="service-add-badge">+</span>
+          <strong>Thêm dịch vụ</strong>
+          <small>Tạo thẻ dịch vụ mới để hiển thị ở cả tài khoản Quản lý và Khách hàng.</small>
+          <em>Nhập tên, giá, thời gian, ảnh và tài nguyên phục vụ <span>→</span></em>
+        </button>
+      </div>
+    </section>
+
+    <section id="uu-dai" class="promo section-pad">
+      <div class="promo-copy"><p class="eyebrow">ƯU ĐÃI DÀNH RIÊNG CHO BẠN</p><h2>Đặt lịch online,<br>chủ động thời gian.</h2><p>Nhận thông báo lịch hẹn, chương trình ưu đãi và cập nhật mới từ tiệm.</p></div>
+      <div class="promo-side">
+        <article id="salonMiniCard" class="salon-mini-card salon-mini-card-static" aria-label="Thông tin tiệm được hiển thị trực tiếp">
+          <img id="salonMiniLogo" src="assets/salon-owner-logo.svg" alt="Logo tiệm" />
+          <span class="salon-mini-copy">
+            <small>THÔNG TIN TIỆM</small>
+            <strong id="salonMiniName">BEAUTY MOMENT</strong>
+            <span id="salonMiniAddress">Địa chỉ: Chủ tiệm chưa cập nhật</span>
+            <span id="salonMiniPhone">SĐT: Chủ tiệm chưa cập nhật</span>
+          </span>
+        </article>
+        <button class="primary-btn" type="button" data-open-role="Khách hàng">Đăng ký khách hàng <span>→</span></button>
+      </div>
+    </section>
+  </main>
+
+  <footer id="lien-he"><strong>BEAUTY MOMENT</strong><span>Web App quản lý & đặt lịch — VISION 61</span></footer>
+
+  <!-- AUTH MODAL -->
+  <div id="authBackdrop" class="modal-backdrop" aria-hidden="true">
+    <section class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button id="closeAuth" class="close-btn" type="button" aria-label="Đóng cửa sổ">×</button>
+
+      <div class="auth-brand"><span>✦</span><div><b>BEAUTY MOMENT</b><small id="roleLabel">Khách hàng</small></div></div>
+      <h2 id="authTitle">Đăng ký tài khoản</h2>
+      <p id="authSubtitle" class="auth-subtitle">Tạo tài khoản để đặt lịch và quản lý lịch hẹn của bạn.</p>
+
+      <div class="auth-tabs" role="tablist">
+        <button id="tabRegister" class="active" type="button" role="tab"><span>♙</span> Đăng ký</button>
+        <button id="tabLogin" type="button" role="tab"><span>●</span> Đăng nhập</button>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="registerView" class="auth-view active">
+        <div class="info-strip"><span class="spark">✦</span><div><b id="registerInfoTitle">Bạn chưa có tài khoản?</b><p id="registerInfoText">Đăng ký lần đầu, hệ thống sẽ gửi mã xác thực về số điện thoại để kích hoạt tài khoản.</p></div></div>
+        <form id="registerForm" class="auth-form" novalidate>
+          <label><span>Họ và tên</span><div class="field"><i>♙</i><input id="regName" type="text" autocomplete="name" placeholder="Nhập họ và tên của bạn" /></div></label>
+          <label><span>Số điện thoại</span><div class="field"><i>⌕</i><input id="regPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Ví dụ: 0912345678" /></div></label>
+          <label class="customer-register-only"><span>Địa chỉ</span><div class="field"><i>⌖</i><input id="regAddress" type="text" autocomplete="street-address" placeholder="Nhập địa chỉ của bạn" /></div></label>
+          <label class="customer-register-only"><span>Giới tính</span><div class="field field-select"><i>♡</i><select id="regGender" aria-label="Giới tính"><option value="">Chọn giới tính</option><option value="Nữ">Nữ</option><option value="Nam">Nam</option></select><span class="select-chevron" aria-hidden="true">⌄</span></div></label>
+          <label><span>Mật khẩu</span><div class="field"><i>▣</i><input id="regPassword" type="password" autocomplete="new-password" placeholder="Tạo mật khẩu từ 6 ký tự" /><button class="eye-btn" type="button" data-toggle-password="regPassword">Hiện</button></div></label>
+          <p id="registerMessage" class="form-message"></p>
+          <button class="submit-btn" type="submit">Nhận mã xác thực <span>→</span></button>
+        </form>
+        <p class="switch-hint">Đã có tài khoản? <button type="button" data-go-login>Đăng nhập ngay</button></p>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginView" class="auth-view">
+        <div class="info-strip"><span class="spark">♡</span><div><b>Chào mừng bạn quay lại</b><p>Đăng nhập bằng tài khoản đã được xác thực trước đó.</p></div></div>
+        <div id="demoCustomerSwitcher" class="demo-customer-switcher" hidden>
+          <span>TEST NHANH 2 TÀI KHOẢN KHÁCH</span>
+          <div class="demo-customer-buttons">
+            <button type="button" data-demo-customer="0356166765"><b>Khách 1</b><small>Nguyễn Thị Thắm</small></button>
+            <button type="button" data-demo-customer="0356166767"><b>Khách 2</b><small>Nguyễn Thị Lành</small></button>
+          </div>
+        </div>
+        <form id="loginForm" autocomplete="off" class="auth-form" novalidate>
+          <label><span>Họ và tên</span><div class="field"><i>♙</i><input id="loginName" autocomplete="off" type="text" autocomplete="name" placeholder="Nhập họ và tên" /></div></label>
+          <label><span>Số điện thoại</span><div class="field"><i>⌕</i><input id="loginPhone" autocomplete="off" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Nhập số điện thoại" /></div></label>
+          <label><span>Mật khẩu</span><div class="field"><i>▣</i><input id="loginPassword" autocomplete="new-password" type="password" autocomplete="current-password" placeholder="Nhập mật khẩu" /><button class="eye-btn" type="button" data-toggle-password="loginPassword">Hiện</button></div></label>
+          <div class="forgot-row"><button id="forgotBtn" type="button">Quên mật khẩu?</button></div>
+          <p id="loginMessage" class="form-message"></p>
+          <button class="submit-btn" type="submit">Đăng nhập <span>→</span></button>
+        </form>
+        <p class="switch-hint">Chưa có tài khoản? <button type="button" data-go-register>Đăng ký tài khoản</button></p>
+      </div>
+
+      <!-- REGISTER OTP -->
+      <div id="registerOtpView" class="auth-view center-view">
+        <button class="back-link" type="button" data-go-register>← Quay lại đăng ký</button>
+        <div class="big-icon">✦</div>
+        <h3>Xác thực số điện thoại</h3>
+        <p id="registerOtpRoleText" class="otp-role-text">Đang xác thực tài khoản Khách hàng</p>
+        <p>Mã 6 số đã được gửi tới <b id="registerOtpPhone"></b></p>
+        <div id="registerOtpInputs" class="otp-grid"></div>
+        <p id="registerOtpMessage" class="form-message center"></p>
+        <button id="verifyRegisterOtp" class="submit-btn" type="button">Xác nhận & tạo tài khoản</button>
+        <button id="resendRegisterOtp" class="text-link" type="button">Gửi lại mã xác thực</button>
+      </div>
+
+      <!-- FORGOT PHONE -->
+      <div id="forgotView" class="auth-view">
+        <button class="back-link" type="button" data-go-login>← Quay lại đăng nhập</button>
+        <div class="big-icon">▣</div>
+        <h3>Quên mật khẩu</h3>
+        <p class="center-copy">Nhập số điện thoại đã đăng ký. Hệ thống sẽ gửi mã xác thực để bạn đặt lại mật khẩu.</p>
+        <form id="forgotForm" class="auth-form compact" novalidate>
+          <label><span>Số điện thoại</span><div class="field"><i>⌕</i><input id="forgotPhone" type="tel" inputmode="numeric" placeholder="Nhập số điện thoại" /></div></label>
+          <p id="forgotMessage" class="form-message"></p>
+          <button class="submit-btn" type="submit">Lấy mã xác thực <span>→</span></button>
+        </form>
+      </div>
+
+      <!-- FORGOT OTP -->
+      <div id="forgotOtpView" class="auth-view center-view">
+        <button class="back-link" type="button" data-open-forgot>← Nhập lại số điện thoại</button>
+        <div class="big-icon">✦</div>
+        <h3>Nhập mã xác thực</h3>
+        <p>Mã 6 số đã được gửi tới <b id="forgotOtpPhone"></b></p>
+        <div id="forgotOtpInputs" class="otp-grid"></div>
+        <p id="forgotOtpMessage" class="form-message center"></p>
+        <button id="verifyForgotOtp" class="submit-btn" type="button">Xác nhận mã</button>
+        <button id="resendForgotOtp" class="text-link" type="button">Gửi lại mã xác thực</button>
+      </div>
+
+      <!-- RESET PASSWORD -->
+      <div id="resetPasswordView" class="auth-view center-view">
+        <div class="big-icon">♡</div>
+        <h3>Tạo mật khẩu mới</h3>
+        <p>Đặt mật khẩu mới cho tài khoản của bạn.</p>
+        <form id="resetPasswordForm" class="auth-form compact" novalidate>
+          <label><span>Mật khẩu mới</span><div class="field"><i>▣</i><input id="newPassword" type="password" autocomplete="new-password" placeholder="Tối thiểu 6 ký tự" /><button class="eye-btn" type="button" data-toggle-password="newPassword">Hiện</button></div></label>
+          <label><span>Nhập lại mật khẩu</span><div class="field"><i>▣</i><input id="confirmPassword" type="password" autocomplete="new-password" placeholder="Nhập lại mật khẩu mới" /><button class="eye-btn" type="button" data-toggle-password="confirmPassword">Hiện</button></div></label>
+          <p id="resetMessage" class="form-message"></p>
+          <button class="submit-btn" type="submit">Đổi mật khẩu</button>
+        </form>
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="successView" class="auth-view center-view success-view">
+        <div class="success-icon">✓</div>
+        <h3 id="successTitle">Thành công</h3>
+        <p id="successText">Tài khoản của bạn đã sẵn sàng.</p>
+        <button id="successContinue" class="submit-btn" type="button">Tiếp tục</button>
+      </div>
+
+      <div class="modal-footer-line"><span></span><em>Chăm sóc vẻ đẹp ♥ Đồng hành cùng bạn</em><span></span></div>
+    </section>
+  </div>
+
+
+  <!-- NOTIFICATION DETAIL MODAL -->
+  <div id="notificationDetailBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section class="detail-modal notification-detail-modal" role="dialog" aria-modal="true" aria-labelledby="notificationDetailTitle">
+      <button id="closeNotificationDetail" class="close-btn" type="button" aria-label="Đóng nội dung thông báo">×</button>
+      <div class="detail-kicker"><span id="notificationDetailIcon">✦</span><div><small>THÔNG BÁO TỪ TIỆM</small><b id="notificationDetailType">Cập nhật</b></div></div>
+      <h2 id="notificationDetailTitle">Nội dung thông báo</h2>
+      <div class="detail-meta"><span id="notificationDetailSender">BEAUTY MOMENT</span><i>•</i><time id="notificationDetailTime"></time></div>
+      <div id="notificationDetailBody" class="notification-detail-body"></div>
+      <div id="notificationDetailActions" class="notification-detail-actions" hidden></div>
+      <div class="notification-detail-note"><span>♡</span><p>Nội dung ở cửa sổ này sẽ hiển thị đầy đủ đúng theo thông báo gửi đến tài khoản đang đăng nhập.</p></div>
+      <button id="closeNotificationDetailBottom" class="submit-btn detail-close-action" type="button">Đã xem</button>
+    </section>
+  </div>
+
+  <!-- CUSTOMER: MY SCHEDULE MODAL (giữ nguyên giao diện phía Khách như Vision 24) -->
+  <div id="myScheduleBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section id="myScheduleModal" class="detail-modal my-schedule-modal" role="dialog" aria-modal="true" aria-labelledby="myScheduleTitle">
+      <button id="closeMySchedule" class="close-btn" type="button" aria-label="Đóng Lịch của tôi">×</button>
+      <div class="detail-kicker"><span>🗓</span><div><small>TÀI KHOẢN KHÁCH HÀNG</small><b>Lịch của tôi</b></div></div>
+      <h2 id="myScheduleTitle">Lịch hẹn của bạn</h2>
+      <p id="myScheduleAccount" class="my-schedule-account"></p>
+      <div id="myScheduleToolbar" class="customer-schedule-toolbar"></div>
+      <div id="myScheduleList" class="my-schedule-list"></div>
+    </section>
+  </div>
+
+  <!-- MANAGER: CUSTOMER APPOINTMENTS MODAL -->
+  <div id="managerScheduleBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section id="managerScheduleModal" class="detail-modal my-schedule-modal manager-mode manager-table-modal" role="dialog" aria-modal="true" aria-labelledby="managerScheduleTitle">
+      <button id="closeManagerSchedule" class="close-btn" type="button" aria-label="Đóng danh sách lịch khách đặt">×</button>
+      <div class="detail-kicker"><span>▦</span><div><small>TÀI KHOẢN QUẢN LÝ</small><b>Bảng lịch khách hàng</b></div></div>
+      <div class="manager-schedule-title-row">
+        <div>
+          <h2 id="managerScheduleTitle">Danh sách lịch đặt của khách hàng</h2>
+          <p id="managerScheduleAccount" class="my-schedule-account"></p>
+        </div>
+        <button id="managerScheduleBookBtn" class="manager-schedule-book-btn" type="button"><span>＋</span> Đăng ký lịch cho khách</button>
+      </div>
+      <div id="managerScheduleList" class="my-schedule-list"></div>
+    </section>
+  </div>
+
+  <!-- SERVICE STAFF SELECT MODAL -->
+  <div id="staffSelectBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section class="detail-modal staff-select-modal" role="dialog" aria-modal="true" aria-labelledby="staffSelectTitle">
+      <button id="closeStaffSelect" class="close-btn" type="button" aria-label="Đóng danh sách nhân viên">×</button>
+      <div class="detail-kicker"><span>♡</span><div><small>NHÂN VIÊN PHỤC VỤ</small><b id="staffSelectServiceLabel">Dịch vụ tại tiệm</b></div></div>
+      <h2 id="staffSelectTitle">Ai đã phục vụ bạn?</h2>
+      <p class="my-schedule-account">Chọn đúng nhân viên đã trực tiếp phục vụ bạn. Sau đó bạn có thể chấm sao đánh giá chất lượng.</p>
+      <div id="staffSelectList" class="staff-select-list"></div>
+      <div class="service-detail-actions"><button id="closeStaffSelectBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </section>
+  </div>
+
+  <!-- SERVICE FEEDBACK MODAL -->
+  <div id="serviceFeedbackBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section class="detail-modal service-feedback-modal" role="dialog" aria-modal="true" aria-labelledby="serviceFeedbackTitle">
+      <button id="closeServiceFeedback" class="close-btn" type="button" aria-label="Đóng cửa sổ phản hồi dịch vụ">×</button>
+      <div class="detail-kicker"><span>✎</span><div><small>PHẢN HỒI DỊCH VỤ</small><b id="serviceFeedbackServiceLabel">Dịch vụ tại tiệm</b></div></div>
+      <h2 id="serviceFeedbackTitle">Chia sẻ trải nghiệm của bạn</h2>
+      <p class="my-schedule-account">Phần này không bắt buộc. Bạn có thể chia sẻ chất lượng dịch vụ, thái độ phục vụ, mức độ hài lòng hoặc điều tiệm nên cải thiện.</p>
+      <label class="service-feedback-field">
+        <span>Nội dung phản hồi</span>
+        <textarea id="serviceFeedbackText" maxlength="1200" placeholder="Ví dụ: Nhân viên phục vụ nhẹ nhàng, làm cẩn thận... hoặc điều bạn chưa hài lòng để tiệm cải thiện."></textarea>
+      </label>
+      <div class="service-feedback-meta">
+        <span id="serviceFeedbackCount">0/1200 ký tự</span>
+        <span id="serviceFeedbackSavedState"></span>
+      </div>
+      <div class="service-detail-actions service-feedback-actions">
+        <button id="closeServiceFeedbackBottom" class="ghost-btn" type="button">Đóng</button>
+        <button id="saveServiceFeedback" class="submit-btn" type="button">Gửi phản hồi →</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- BOOKING MODAL -->
+  <div id="bookingBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section class="detail-modal booking-modal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+      <button id="closeBookingModal" class="close-btn" type="button" aria-label="Đóng cửa sổ đặt lịch">×</button>
+      <div class="booking-ornament booking-ornament-left">❦</div>
+      <div class="booking-ornament booking-ornament-right">✦</div>
+      <div class="detail-kicker booking-kicker"><span>🗓</span><div><small>ĐẶT LỊCH KHÁCH HÀNG</small><b>Beauty Moment</b></div></div>
+      <h2 id="bookingModalTitle">Đặt lịch dịch vụ</h2>
+      <p class="booking-subtitle">Chọn dịch vụ, ngày giờ phù hợp và gửi lịch hẹn tới tiệm. Cửa sổ này dành riêng cho khách đã đăng nhập.</p>
+
+      <div class="booking-shell">
+        <form id="bookingForm" class="booking-form" novalidate>
+          <input id="bookingService" type="hidden" value="nail-care" />
+
+          <section id="managerBookingCustomerPanel" class="manager-booking-customer-panel" hidden>
+            <div class="manager-booking-panel-head">
+              <div>
+                <p class="booking-selected-eyebrow">QUẢN LÝ ĐẶT LỊCH CHO KHÁCH</p>
+                <h3>Khách nào đang sử dụng lịch này?</h3>
+                <p>Chọn đúng loại khách để lịch, bàn phục vụ, CRM và các báo cáo cùng dùng một nguồn dữ liệu.</p>
+              </div>
+              <span id="managerBookingSourceBadge" class="manager-booking-source-badge">QUẢN LÝ ĐẶT HỘ</span>
+            </div>
+            <div class="manager-booking-mode-tabs" role="tablist" aria-label="Loại khách đặt hộ">
+              <button id="managerBookingRegisteredTab" class="manager-booking-mode-tab is-active" type="button" data-manager-booking-mode="registered">Khách có tài khoản</button>
+              <button id="managerBookingGuestTab" class="manager-booking-mode-tab" type="button" data-manager-booking-mode="guest">Khách vãng lai / chưa có tài khoản</button>
+            </div>
+
+            <div id="managerBookingRegisteredPane" class="manager-booking-pane is-active">
+              <label class="manager-booking-search-field">
+                <span>Tìm khách theo tên hoặc số điện thoại</span>
+                <div class="field"><i>⌕</i><input id="managerBookingCustomerSearch" type="search" placeholder="Ví dụ: Thắm hoặc 0356166765" autocomplete="off" /></div>
+              </label>
+              <label>
+                <span>Chọn khách hàng</span>
+                <div class="field"><i>♡</i><select id="managerBookingCustomerSelect"><option value="">— Chọn khách có tài khoản —</option></select></div>
+              </label>
+              <div id="managerBookingSelectedCustomer" class="manager-booking-selected-customer">Chưa chọn khách hàng.</div>
+            </div>
+
+            <div id="managerBookingGuestPane" class="manager-booking-pane" hidden>
+              <div class="manager-booking-guest-grid">
+                <label><span>Họ và tên</span><div class="field"><i>♙</i><input id="managerGuestName" type="text" placeholder="Nhập tên khách" /></div></label>
+                <label><span>Số điện thoại</span><div class="field"><i>⌕</i><input id="managerGuestPhone" type="tel" placeholder="Nhập SĐT để lưu lịch sử khách" /></div></label>
+                <label><span>Giới tính</span><div class="field"><i>♡</i><select id="managerGuestGender"><option value="">— Chọn —</option><option value="Nữ">Nữ</option><option value="Nam">Nam</option></select></div></label>
+                <label><span>Địa chỉ</span><div class="field"><i>⌂</i><input id="managerGuestAddress" type="text" placeholder="Có thể nhập nếu khách cung cấp" /></div></label>
+              </div>
+              <div class="manager-booking-guest-note">Khách vãng lai không nhận thông báo trên app. SĐT được dùng để tạo hồ sơ CRM và có thể tự liên kết lịch sử nếu khách đăng ký tài khoản sau này bằng cùng số điện thoại.</div>
+            </div>
+          </section>
+
+          <div class="booking-selected-service-card">
+            <p class="booking-selected-eyebrow">DỊCH VỤ ĐÃ CHỌN</p>
+            <div class="booking-selected-main">
+              <div>
+                <h3 id="bookingChosenServiceName">Chăm sóc móng</h3>
+                <p id="bookingChosenServiceText">Bạn đã chọn dịch vụ này để đặt lịch. Hãy tiếp tục chọn ngày và giờ phù hợp.</p>
+              </div>
+              <div class="booking-selected-mini-meta">
+                <span id="bookingChosenServicePrice">180.000đ</span>
+                <span id="bookingChosenServiceDuration">60 phút</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="bookingTimingBreakdown" class="booking-timing-breakdown" aria-label="Chi tiết thời gian dịch vụ">
+            <div><span>Thời gian phục vụ khách</span><strong id="bookingServiceCustomerMinutes">50 phút</strong></div>
+            <div><span>Thời gian đệm</span><strong id="bookingServiceBufferMinutes">10 phút</strong><small>dọn dẹp sau phục vụ</small></div>
+            <div class="is-total"><span>Tổng thời gian</span><strong id="bookingServiceTotalMinutes">60 phút</strong></div>
+          </div>
+
+          <div id="bookingNailPickerWrap" class="booking-nail-picker">
+            <p class="booking-selected-eyebrow">MẪU MÓNG</p>
+            <input id="bookingNailSample" type="hidden" value="" />
+            <button id="bookingNailPickerBtn" class="booking-nail-picker-btn" type="button">
+              <span class="booking-nail-picker-thumb"><img id="bookingNailThumb" src="assets/nail-sample-1.png" alt="Mẫu móng đã chọn" hidden></span>
+              <span class="booking-nail-picker-copy">
+                <strong id="bookingNailSampleName">Chưa chọn mẫu móng</strong>
+                <small>Bấm để xem hình ảnh đầy đủ và mã mẫu hiện có tại tiệm</small>
+              </span>
+              <span class="booking-nail-picker-arrow">→</span>
+            </button>
+          </div>
+
+          <div class="booking-form-grid booking-form-grid-compact booking-fixed-fields">
+            <label>
+              <span>Ngày hẹn</span>
+              <div class="field"><i>◫</i><input id="bookingDate" type="date" /></div>
+            </label>
+            <label>
+              <span>Giờ bắt đầu</span>
+              <div class="field">
+                <i>◷</i>
+                <select id="bookingTime"></select>
+              </div>
+            </label>
+            <label>
+              <span>Giờ kết thúc dự kiến</span>
+              <div class="field booking-end-field"><i>✦</i><input id="bookingEndTime" type="text" value="09:00" readonly /></div>
+            </label>
+            <div id="serviceTableStatusWrap" class="nail-table-status-wrap">
+              <span id="serviceTableStatusLabel" class="nail-table-status-label">Tình trạng bàn dịch vụ</span>
+              <div id="serviceTableStatusRow" class="nail-table-status-row" aria-label="Tình trạng các bàn phục vụ"></div>
+              <small id="serviceTableStatusHint">Màu xanh: bàn trống • Màu vàng cam: đã có khách đặt, chờ chủ xác nhận • Màu đỏ: chủ đã xác nhận lịch</small>
+            </div>
+            <label class="booking-note-row">
+              <span>Ghi chú thêm</span>
+              <div class="field field-textarea"><i>✎</i><textarea id="bookingNote" rows="4" placeholder="Ví dụ: muốn sơn tone hồng sữa, da đầu nhạy cảm, cần làm nhanh trước 17:00..."></textarea></div>
+            </label>
+          </div>
+          <p id="bookingMessage" class="form-message"></p>
+          <div class="booking-form-actions">
+            <button class="ghost-btn" id="bookingCancelBtn" type="button">Đóng</button>
+            <button class="manager-book-now-btn" id="managerBookNowBtn" type="button" hidden>◷ Dùng dịch vụ ngay</button>
+            <button class="submit-btn" id="bookingSubmitBtn" type="submit">Xác nhận đặt lịch <span>→</span></button>
+          </div>
+        </form>
+
+        <aside class="booking-service-chooser">
+          <div class="booking-service-chooser-head">
+            <p class="booking-summary-eyebrow">CHỌN DỊCH VỤ</p>
+            <p>Chạm vào từng dịch vụ ở bên phải để đưa vào lịch hẹn.</p>
+          </div>
+
+          <div id="bookingServiceCardList">
+          <button class="booking-service-card is-active" type="button" data-booking-service="nail-care">
+            <span class="booking-service-no">01</span>
+            <img src="assets/service-nail-care.png" alt="Chăm sóc móng">
+            <div class="booking-service-card-body">
+              <h4>Chăm sóc móng</h4>
+              <p>Làm sạch móng, chỉnh dáng, sơn gel và chăm chút vẻ đẹp đôi tay.</p>
+              <div class="booking-service-card-meta">
+                <span>180.000đ</span>
+                <span>60 phút</span>
+              </div>
+            </div>
+          </button>
+
+          <button class="booking-service-card" type="button" data-booking-service="goi-duong-sinh">
+            <span class="booking-service-no">02</span>
+            <img src="assets/service-goi-duong-sinh.png" alt="Gội đầu dưỡng sinh">
+            <div class="booking-service-card-body">
+              <h4 class="booking-goi-title">Gội đầu dưỡng sinh</h4>
+              <p>Massage nhẹ nhàng, làm sạch da đầu và giúp cơ thể thư giãn dễ chịu.</p>
+              <div class="booking-service-card-meta">
+                <span>250.000đ</span>
+                <span>75 phút</span>
+              </div>
+            </div>
+          </button>
+
+          <button class="booking-service-card" type="button" data-booking-service="beauty-relax">
+            <span class="booking-service-no">03</span>
+            <img src="assets/service-beauty-relax.png" alt="Làm đẹp và thư giãn">
+            <div class="booking-service-card-body">
+              <h4>Làm đẹp & thư giãn</h4>
+              <p>Không gian chăm sóc dịu nhẹ để bạn thư giãn và cảm thấy tươi tắn hơn.</p>
+              <div class="booking-service-card-meta">
+                <span>320.000đ</span>
+                <span>90 phút</span>
+              </div>
+            </div>
+          </button>
+          </div>
+
+          <button id="bookingWaitlistBtn" class="booking-waitlist-menu" type="button">
+            <span class="booking-waitlist-icon">☷</span>
+            <span class="booking-waitlist-copy">
+              <small>DỊCH VỤ ĐANG CHỌN</small>
+              <strong>Danh sách khách chờ</strong>
+              <em id="bookingWaitlistHint">Xem số khách chờ và khung thời gian họ đang chờ.</em>
+            </span>
+            <span id="bookingWaitlistCount" class="booking-waitlist-count">0</span>
+            <span class="booking-waitlist-arrow">→</span>
+          </button>
+
+          <button id="bookingGuideBtn" class="booking-guide-menu" type="button">
+            <span class="booking-guide-icon">✦</span>
+            <span class="booking-guide-copy">
+              <small>HỖ TRỢ NHANH</small>
+              <strong>Hướng dẫn đặt dịch vụ</strong>
+              <em id="bookingGuideHint">Xem hướng dẫn cơ bản theo đúng dịch vụ bạn đang chọn.</em>
+            </span>
+            <span class="booking-guide-arrow">→</span>
+          </button>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <!-- WAITLIST MODAL -->
+  <div id="waitlistBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section class="detail-modal waitlist-modal" role="dialog" aria-modal="true" aria-labelledby="waitlistTitle">
+      <button id="closeWaitlist" class="close-btn" type="button" aria-label="Đóng danh sách khách chờ">×</button>
+      <div class="detail-kicker"><span>☷</span><div><small>DANH SÁCH KHÁCH CHỜ</small><b id="waitlistServiceLabel">Chăm sóc móng</b></div></div>
+      <h2 id="waitlistTitle">Khách đang chờ dịch vụ này</h2>
+      <p id="waitlistDateLabel" class="my-schedule-account"></p>
+      <div class="waitlist-overview">
+        <div class="waitlist-overview-card"><small>SỐ KHÁCH ĐANG CHỜ</small><strong id="waitlistTotal">0 khách</strong></div>
+        <div class="waitlist-overview-card waitlist-gap-card"><small>KHOẢNG TRỐNG GIỮA CÁC LƯỢT CHỜ</small><div id="waitlistGapSummary" class="waitlist-gap-summary">Đang tính...</div></div>
+      </div>
+      <div class="waitlist-note"><span>♡</span><p>Danh sách bên dưới <b>chỉ hiển thị khách đang chờ đúng dịch vụ bạn đang chọn</b>. Thời gian hiển thị giúp bạn tham khảo mức độ đông và khoảng cách giữa các lượt chờ.</p></div>
+      <div id="waitlistItems" class="waitlist-items"></div>
+      <div class="service-detail-actions"><button id="closeWaitlistBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </section>
+  </div>
+
+  <!-- SERVICE BOOKING GUIDE MODAL -->
+  <div id="guideBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section class="detail-modal guide-modal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+      <button id="closeGuide" class="close-btn" type="button" aria-label="Đóng hướng dẫn đặt dịch vụ">×</button>
+      <div class="detail-kicker"><span>✦</span><div><small>HƯỚNG DẪN ĐẶT DỊCH VỤ</small><b id="guideServiceLabel">Chăm sóc móng</b></div></div>
+      <h2 id="guideTitle">Cách đặt dịch vụ này</h2>
+      <p id="guideIntro" class="my-schedule-account">Xem hướng dẫn ngắn gọn để đặt đúng dịch vụ bạn đang quan tâm.</p>
+      <div id="guideOverview" class="guide-overview"></div>
+      <div id="guideSteps" class="guide-steps"></div>
+      <div class="waitlist-note"><span>♡</span><p><b>Mẹo nhỏ:</b> Khách chỉ cần chọn dịch vụ, ngày hẹn, giờ bắt đầu và ghi chú thêm nếu cần. Các phần thông tin tài khoản sẽ được lấy sẵn từ tài khoản đã đăng nhập.</p></div>
+      <div class="service-detail-actions"><button id="closeGuideBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </section>
+  </div>
+
+  <!-- CONTACT / SALON INFO MODAL -->
+  <div id="contactBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section class="detail-modal contact-modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+      <button id="closeContact" class="close-btn" type="button" aria-label="Đóng cửa sổ liên hệ">×</button>
+      <div class="contact-hero">
+        <img id="contactSalonLogo" src="assets/salon-owner-logo.svg" alt="Logo của tiệm" />
+        <div><p class="eyebrow">THÔNG TIN LIÊN HỆ</p><h2 id="contactTitle">BEAUTY MOMENT</h2><p>Chăm sóc vẻ đẹp • Đồng hành cùng bạn</p></div>
+      </div>
+      <div id="contactReadOnlyView">
+        <div class="contact-info-grid">
+          <div class="contact-info-item"><span class="contact-info-icon">✦</span><div><small>Tên tiệm</small><strong id="contactSalonName">BEAUTY MOMENT</strong></div></div>
+          <div class="contact-info-item"><span class="contact-info-icon">⌖</span><div><small>Địa chỉ</small><strong id="contactSalonAddress">Chủ tiệm chưa cập nhật địa chỉ</strong></div></div>
+          <div class="contact-info-item"><span class="contact-info-icon">☎</span><div><small>Số điện thoại liên hệ</small><strong id="contactSalonPhone">Chủ tiệm chưa cập nhật số điện thoại</strong></div></div>
+        </div>
+        <div class="contact-sync-note"><span>↻</span><p><b>Thông tin dùng chung:</b> dữ liệu này được lấy từ hồ sơ do tài khoản Quản lý cập nhật. Khi Quản lý thay đổi, các vị trí liên quan phía Khách hàng sẽ tự nhận thông tin mới.</p></div>
+      </div>
+
+      <form id="managerSalonForm" class="manager-salon-form" hidden>
+        <div class="manager-salon-edit-head">
+          <div><p class="eyebrow">CẬP NHẬT THÔNG TIN TIỆM</p><h3>Chỉnh sửa hồ sơ hiển thị cho khách hàng</h3></div>
+          <span>Quản lý</span>
+        </div>
+        <div class="manager-salon-logo-row">
+          <img id="managerSalonLogoPreview" src="assets/salon-owner-logo.svg" alt="Logo tiệm đang sử dụng" />
+          <div>
+            <strong>Logo của tiệm</strong>
+            <p>Chọn ảnh logo mới nếu muốn thay đổi. Logo mới sẽ đồng bộ sang các vị trí liên quan phía Khách hàng.</p>
+            <label class="manager-logo-upload">Chọn logo mới<input id="managerSalonLogoInput" type="file" accept="image/*" /></label>
+          </div>
+        </div>
+        <div class="manager-salon-grid">
+          <label><span>Tên tiệm</span><input id="managerSalonName" type="text" placeholder="Ví dụ: BEAUTY MOMENT" /></label>
+          <label><span>Số điện thoại liên hệ</span><input id="managerSalonPhone" type="tel" placeholder="Ví dụ: 0356 166 766" /></label>
+          <label class="manager-salon-address"><span>Địa chỉ</span><textarea id="managerSalonAddress" rows="3" placeholder="Nhập địa chỉ tiệm"></textarea></label>
+        </div>
+        <p id="managerSalonMessage" class="form-message"></p>
+        <div class="manager-salon-actions"><button id="managerSalonResetBtn" class="ghost-btn" type="button">Khôi phục dữ liệu đang lưu</button><button class="primary-btn" type="submit">Lưu thay đổi <span>→</span></button></div>
+        <div class="contact-sync-note"><span>↻</span><p><b>Đồng bộ tự động:</b> sau khi bấm Lưu thay đổi, dữ liệu được ghi vào nguồn dùng chung của hệ thống. Nếu tài khoản Khách hàng đang mở ở tab khác, các phần thông tin liên quan sẽ tự cập nhật mà không cần đăng nhập lại.</p></div>
+      </form>
+    </section>
+  </div>
+
+
+  <!-- MANAGER PROMOTIONS & NOTIFICATIONS MODAL -->
+  <div id="managerCommsBackdrop" class="modal-backdrop manager-comms-backdrop" aria-hidden="true">
+    <section class="manager-comms-modal" role="dialog" aria-modal="true" aria-labelledby="managerCommsTitle">
+      <button id="closeManagerComms" class="close-btn" type="button" aria-label="Đóng Khuyến mại và thông báo">×</button>
+      <div class="detail-kicker"><span>✉</span><div><small>TÀI KHOẢN QUẢN LÝ</small><b>Khuyến mại &amp; thông báo</b></div></div>
+      <div class="manager-comms-head">
+        <div>
+          <h2 id="managerCommsTitle">Gửi thông tin tới khách hàng</h2>
+          <p>Soạn một nội dung, chọn đúng nhóm khách nhận rồi bấm Gửi. Thông báo sẽ đi thẳng tới chuông của từng tài khoản được chọn.</p>
+        </div>
+        <div class="manager-comms-stat"><small>ĐÃ CHỌN</small><strong id="managerCommsSelectedCount">0 khách</strong></div>
+      </div>
+
+      <div class="manager-comms-layout">
+        <form id="managerCommsForm" class="manager-composer" novalidate>
+          <div class="manager-composer-title"><span>01</span><div><small>SOẠN NỘI DUNG</small><strong>Thông báo gửi khách</strong></div></div>
+
+          <label class="manager-comms-field">
+            <span>Loại nội dung</span>
+            <div class="manager-comms-type-grid">
+              <label class="manager-comms-type active"><input type="radio" name="managerCommsType" value="promotion" checked><span>🎁</span><div><b>Khuyến mại</b><small>Tăng số dưới menu Ưu đãi của khách</small></div></label>
+              <label class="manager-comms-type"><input type="radio" name="managerCommsType" value="announcement"><span>📣</span><div><b>Thông báo chung</b><small>Hiển thị tại chuông thông báo</small></div></label>
+            </div>
+          </label>
+
+          <label class="manager-comms-field"><span>Tóm tắt</span><input id="managerCommsSubject" type="text" maxlength="300" placeholder="Ví dụ: Nghỉ lễ 2/9/2026, tiệm nghỉ 1 ngày và mở lại vào 3/9"></label>
+
+          <label class="manager-ai-trigger" for="managerCommsAiReady">
+            <input id="managerCommsAiReady" type="checkbox">
+            <span class="manager-ai-check">✓</span>
+            <span class="manager-ai-trigger-copy"><b>✨ Tôi đã soạn xong nội dung tóm tắt</b><small>Tích vào đây để trợ lý AI thử nghiệm viết thành thông báo đầy đủ, tự nhiên và truyền cảm hơn.</small></span>
+          </label>
+
+          <label class="manager-comms-field manager-ai-body-field"><span>Nội dung chi tiết</span><textarea id="managerCommsBody" rows="9" maxlength="2600" placeholder="Nội dung chi tiết sẽ được trợ lý AI soạn từ phần Tóm tắt ở trên..."></textarea></label>
+          <div class="manager-ai-actions" aria-label="Duyệt nội dung do AI soạn">
+            <button id="managerCommsAiApprove" class="manager-ai-approve" type="button" disabled>✓ Đồng ý</button>
+            <button id="managerCommsAiRevise" class="manager-ai-revise" type="button" disabled>↻ Sửa đổi</button>
+            <span id="managerCommsAiStatus" class="manager-ai-status">Chưa tạo nội dung</span>
+          </div>
+
+          <div class="manager-comms-preview">
+            <small>XEM TRƯỚC</small>
+            <strong id="managerCommsPreviewTitle">Tóm tắt thông báo sẽ hiển thị tại đây</strong>
+            <p id="managerCommsPreviewBody">Nội dung khách nhận được sẽ hiển thị ở khu vực này.</p>
+          </div>
+          <p id="managerCommsMessage" class="form-message"></p>
+          <button class="submit-btn manager-comms-send" type="submit">Gửi tới khách đã chọn <span>→</span></button>
+        </form>
+
+        <aside class="manager-recipient-panel">
+          <div class="manager-composer-title"><span>02</span><div><small>DANH SÁCH NGƯỜI NHẬN</small><strong>Chọn khách hàng</strong></div></div>
+          <label class="manager-select-all"><input id="managerCommsSelectAll" type="checkbox"><span class="manager-recipient-check">✓</span><div><b>Chọn tất cả khách hàng</b><small id="managerCommsCustomerTotal">0 tài khoản khách</small></div></label>
+          <label class="manager-recipient-segment"><span>Nhóm khách nhận</span><select id="managerCommsSegmentFilter" aria-label="Lọc khách theo nhóm"><option value="all">Tất cả khách hàng</option><option value="tier:Kim cương">Hạng Kim cương</option><option value="tier:Vàng">Hạng Vàng</option><option value="tier:Bạc">Hạng Bạc</option><option value="behavior:frequent">Khách thường xuyên</option><option value="behavior:returning">Khách quay lại</option><option value="behavior:one">Khách 1 lần</option><option value="behavior:dormant">Lâu chưa quay lại</option><option value="care">Cần chăm sóc</option></select></label>
+          <div class="manager-recipient-search"><span>⌕</span><input id="managerCommsSearch" type="search" placeholder="Tìm theo tên hoặc số điện thoại"></div>
+          <div id="managerCommsRecipientList" class="manager-recipient-list"></div>
+          <div class="manager-recipient-note"><span>♡</span><p>Chỉ những khách được tích chọn mới nhận nội dung. Với <b>Khuyến mại</b>, số chưa xem cũng được hiển thị ngay dưới menu <b>Ưu đãi</b> của khách.</p></div>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <!-- ACTIVE PROMOTIONS LIST MODAL -->
+  <div id="promotionHistoryBackdrop" class="modal-backdrop promotion-history-backdrop" aria-hidden="true">
+    <section class="promotion-history-modal" role="dialog" aria-modal="true" aria-labelledby="promotionHistoryTitle">
+      <button id="closePromotionHistory" class="close-btn" type="button" aria-label="Đóng danh sách chương trình khuyến mại">×</button>
+      <div class="detail-kicker"><span>🎁</span><div><small id="promotionHistoryEyebrow">CHƯƠNG TRÌNH KHUYẾN MẠI</small><b id="promotionHistoryRoleLabel">Đang còn hiệu lực</b></div></div>
+      <div class="promotion-history-head">
+        <div>
+          <h2 id="promotionHistoryTitle">Chương trình khuyến mại</h2>
+          <p id="promotionHistorySubtitle">Danh sách các chương trình còn hiệu lực trong 2 ngày kể từ lúc gửi.</p>
+        </div>
+        <div class="promotion-history-stat"><small>ĐANG HIỂN THỊ</small><strong id="promotionHistoryCount">0 chương trình</strong></div>
+      </div>
+      <div id="promotionHistoryList" class="promotion-history-list"></div>
+      <div class="promotion-history-note"><span>⏱</span><p>Mỗi chương trình khuyến mại tự động hết hiệu lực sau <b>48 giờ</b> kể từ thời điểm gửi. Chương trình đã hết hạn sẽ tự biến mất khỏi danh sách này.</p></div>
+    </section>
+  </div>
+
+  <!-- SERVICE DETAIL MODAL -->
+  <div id="serviceDetailBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section class="detail-modal service-detail-modal" role="dialog" aria-modal="true" aria-labelledby="serviceDetailTitle">
+      <button id="closeServiceDetail" class="close-btn" type="button" aria-label="Đóng chi tiết dịch vụ">×</button>
+      <div class="service-detail-head">
+        <img id="serviceDetailImage" src="assets/service-goi-duong-sinh.png" alt="Hình ảnh dịch vụ" />
+        <div class="service-detail-copy">
+          <p class="eyebrow" id="serviceDetailEyebrow">DỊCH VỤ TẠI TIỆM</p>
+          <h2 id="serviceDetailTitle">Gội đầu dưỡng sinh</h2>
+          <p id="serviceDetailDesc" class="service-detail-desc">Mô tả ngắn dịch vụ.</p>
+          <div class="service-detail-meta">
+            <span><b>Giá dịch vụ</b><small id="serviceDetailPrice">250.000đ</small></span>
+            <span><b>Thời gian</b><small id="serviceDetailDuration">75 phút</small></span>
+          </div>
+        </div>
+      </div>
+      <div class="service-detail-body">
+        <div class="service-detail-summary">
+          <h3>Khách hàng sẽ trải nghiệm gì?</h3>
+          <p id="serviceDetailSummary">Tóm tắt dịch vụ.</p>
+        </div>
+        <div class="service-detail-process">
+          <div class="process-head">
+            <h3>Quy trình tóm tắt từng bước</h3>
+            <p>Giúp khách biết sơ bộ dịch vụ sẽ thực hiện những bước nào.</p>
+          </div>
+          <div id="serviceSteps" class="service-steps"></div>
+        </div>
+      </div>
+      <div class="service-detail-actions">
+        <button class="ghost-btn" id="serviceDetailCloseSecondary" type="button">Đóng</button>
+        <button class="primary-btn" id="serviceDetailBookBtn" type="button">Đặt lịch dịch vụ này <span>→</span></button>
+      </div>
+    </section>
+  </div>
+
+  <!-- NAIL GALLERY MODAL -->
+  <div id="nailGalleryBackdrop" class="modal-backdrop info-backdrop" aria-hidden="true">
+    <section class="detail-modal nail-gallery-modal" role="dialog" aria-modal="true" aria-labelledby="nailGalleryTitle">
+      <button id="closeNailGallery" class="close-btn" type="button" aria-label="Đóng cửa sổ mẫu móng">×</button>
+      <div class="detail-kicker"><span>💅</span><div><small id="nailGalleryKicker">MẪU MÓNG TẠI TIỆM</small><b id="nailGalleryKickerText">Khách có thể xem trước để chọn nhanh hơn</b></div></div>
+      <h2 id="nailGalleryTitle">Mẫu móng hiện có tại tiệm</h2>
+      <p id="nailGallerySubtitle" class="my-schedule-account">Khách hàng có thể xem trước các mẫu móng để đỡ mất thời gian đến tiệm mới ngồi tìm và chọn mẫu.</p>
+
+      <div id="managerNailLibraryTools" class="manager-nail-library-tools" hidden>
+        <div class="manager-nail-library-head">
+          <div><small>THƯ VIỆN MẪU MÓNG</small><strong>Thêm mẫu mới vào kho của tiệm</strong></div>
+          <span id="managerNailLibraryCount">0 mẫu</span>
+        </div>
+        <div class="manager-nail-library-form">
+          <label><span>Mã mẫu</span><input id="managerNailCode" type="text" placeholder="Ví dụ: Mẫu 07" /></label>
+          <label><span>Tên mẫu</span><input id="managerNailName" type="text" placeholder="Ví dụ: Hồng ngọc nhẹ" /></label>
+          <label class="manager-nail-wide"><span>Mô tả ngắn</span><input id="managerNailDescription" type="text" placeholder="Phong cách, màu sắc hoặc dịp phù hợp" /></label>
+          <label class="manager-nail-wide"><span>Ảnh mẫu</span><input id="managerNailImage" type="file" accept="image/*" /></label>
+          <button id="managerNailAddBtn" class="primary-btn" type="button">+ Thêm mẫu móng</button>
+        </div>
+      </div>
+
+      <div id="nailGalleryGrid" class="nail-gallery-grid"></div>
+      <div class="contact-sync-note"><span>↻</span><p id="nailGallerySyncNote"><b>Đồng bộ thư viện:</b> các mẫu do Quản lý thêm hoặc xóa tại đây sẽ tự cập nhật sang phần Mẫu móng của Khách hàng.</p></div>
+      <div class="service-detail-actions"><button id="closeNailGalleryBottom" class="ghost-btn" type="button">Đóng</button></div>
+    </section>
+  </div>
+  <!-- CUSTOMER INTRODUCTION MODAL — VISION 58 -->
+  <div id="customerIntroBackdrop" class="modal-backdrop customer-intro-backdrop" aria-hidden="true">
+    <section class="customer-intro-modal" role="dialog" aria-modal="true" aria-labelledby="customerIntroTitle">
+      <button id="closeCustomerIntro" class="close-btn" type="button" aria-label="Đóng giới thiệu">×</button>
+      <header class="customer-intro-head">
+        <img id="customerIntroLogo" src="assets/salon-owner-logo.svg" alt="Logo tiệm" />
+        <div>
+          <p class="eyebrow">GIỚI THIỆU VỀ TIỆM</p>
+          <h2 id="customerIntroTitle">BEAUTY MOMENT</h2>
+          <p id="customerIntroLead">Một không gian chăm sóc sắc đẹp nhẹ nhàng, chủ động và gần gũi.</p>
+        </div>
+      </header>
+
+      <div class="customer-intro-toolbar">
+        <button id="customerIntroListenBtn" class="customer-intro-listen" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6L8 10H4z"></path><path d="M16 9.5c1.2 1.3 1.2 3.7 0 5"></path><path d="M18.5 7c2.5 2.8 2.5 7.2 0 10"></path></svg>
+          <span>Nghe giới thiệu</span>
+        </button>
+        <small>Nội dung tự đồng bộ khi Chủ tiệm thay đổi thông tin hoặc dịch vụ.</small>
+      </div>
+
+      <div class="customer-intro-info-grid">
+        <article><small>TÊN TIỆM</small><strong id="customerIntroSalonName">BEAUTY MOMENT</strong></article>
+        <article><small>ĐỊA CHỈ</small><strong id="customerIntroAddress">Đang cập nhật</strong></article>
+        <article><small>LIÊN HỆ</small><strong id="customerIntroPhone">Đang cập nhật</strong></article>
+        <article><small>GIỜ MỞ HÔM NAY</small><strong id="customerIntroHours">08:00 – 21:00</strong></article>
+      </div>
+
+      <section class="customer-intro-section">
+        <div class="customer-intro-section-head">
+          <div><small>DỊCH VỤ ĐANG PHỤC VỤ</small><h3>Chọn trải nghiệm phù hợp với bạn</h3></div>
+          <span id="customerIntroServiceCount">0 dịch vụ</span>
+        </div>
+        <div id="customerIntroServices" class="customer-intro-services"></div>
+      </section>
+
+      <section class="customer-intro-values">
+        <div class="customer-intro-section-head"><div><small>GIÁ TRỊ TIỆM MUỐN MANG LẠI</small><h3>Nhẹ nhàng hơn trong từng lần làm đẹp</h3></div></div>
+        <div class="customer-intro-value-grid">
+          <article><span>◷</span><div><strong>Chủ động thời gian</strong><p>Biết giờ mở tiệm, thời lượng dịch vụ và lịch hẹn để hạn chế chờ đợi.</p></div></article>
+          <article><span>♡</span><div><strong>Thông tin rõ ràng</strong><p>Giá, thời gian và nội dung từng dịch vụ được cập nhật theo dữ liệu thực tế của tiệm.</p></div></article>
+          <article><span>✦</span><div><strong>Chăm sóc phù hợp</strong><p id="customerIntroValueDynamic">Mỗi dịch vụ hướng tới một trải nghiệm chỉn chu, dễ hiểu và phù hợp nhu cầu.</p></div></article>
+        </div>
+      </section>
+
+      <div class="customer-intro-actions">
+        <button id="customerIntroCloseBottom" class="ghost-btn" type="button">Đóng</button>
+        <button id="customerIntroBookBtn" class="primary-btn" type="button">Đặt lịch ngay <span>→</span></button>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="managerServiceBackdrop" class="modal-backdrop manager-service-backdrop" aria-hidden="true">
+    <div class="manager-service-modal">
+      <button id="closeManagerService" class="close-btn" type="button" aria-label="Đóng cửa sổ thêm hoặc sửa dịch vụ">×</button>
+      <div class="detail-kicker booking-kicker"><span>✚</span><div><small>TÀI KHOẢN QUẢN LÝ</small><b id="managerServiceModeLabel">Thêm dịch vụ mới</b></div></div>
+      <h2 id="managerServiceHeading">Tạo thẻ dịch vụ mới</h2>
+      <p class="booking-subtitle" id="managerServiceSubtitle">Khi bạn tạo xong, dịch vụ mới sẽ xuất hiện ngay ở giao diện Quản lý, giao diện Khách hàng và trong luồng đặt lịch.</p>
+      <form id="managerServiceForm" class="manager-service-form" novalidate>
+        <div class="booking-form-grid booking-form-grid-compact manager-service-scroll-grid">
+          <label>
+            <span>Tên dịch vụ</span>
+            <div class="field"><i>✦</i><input id="managerServiceName" type="text" placeholder="Ví dụ: Massage cổ vai gáy" /></div>
+            <small class="manager-service-ai-hint">Sau khi nhập tên dịch vụ, AI sẽ tự gợi ý mô tả ngắn và tóm tắt chi tiết.</small>
+          </label>
+          <label>
+            <span>Giá dịch vụ</span>
+            <div class="field"><i>₫</i><input id="managerServicePrice" type="text" placeholder="Ví dụ: 180000 hoặc 180.000đ" /></div>
+          </label>
+          <label>
+            <span>Tổng thời gian giữ lịch</span>
+            <div class="field"><i>◷</i><input id="managerServiceDuration" type="text" placeholder="Ví dụ: 60 phút" /></div>
+            <small class="manager-service-ai-hint">Giữ nguyên tổng thời gian dùng cho Booking Engine. Thời gian phục vụ khách được suy ra sau khi trừ thời gian đệm.</small>
+          </label>
+          <label>
+            <span>Thời gian đệm</span>
+            <div class="field"><i>⌛</i><input id="managerServiceBuffer" type="number" min="0" max="120" step="1" value="10" /></div>
+            <small class="manager-service-ai-hint">Mặc định 10 phút để dọn dẹp và chuẩn bị sau phục vụ.</small>
+          </label>
+          <div id="managerServiceTimingPreview" class="manager-service-timing-preview booking-note-row">
+            <span>Phục vụ khách: <b>50 phút</b></span><span>Đệm: <b>10 phút</b></span><span>Tổng: <b>60 phút</b></span>
+          </div>
+          <label>
+            <span>Tài nguyên / số bàn phục vụ</span>
+            <div class="field"><i>☷</i><input id="managerServiceTables" type="number" min="1" max="20" placeholder="Ví dụ: 3" /></div>
+          </label>
+          <label class="booking-note-row">
+            <span>Mô tả ngắn trên thẻ dịch vụ</span>
+            <div class="field field-textarea"><i>✎</i><textarea id="managerServiceDescription" rows="3" placeholder="AI sẽ tự gợi ý mô tả ngắn để khách hiểu nhanh về dịch vụ"></textarea></div>
+          </label>
+          <label class="booking-note-row">
+            <span>Tóm tắt chi tiết</span>
+            <div class="field field-textarea"><i>♡</i><textarea id="managerServiceSummary" rows="4" placeholder="AI sẽ tự gợi ý tóm tắt trải nghiệm, lợi ích và những gì khách sẽ nhận được"></textarea></div>
+          </label>
+          <div class="booking-note-row manager-service-steps-block">
+            <div class="manager-service-steps-head">
+              <div>
+                <span>Quy trình từng bước</span>
+                <small>Chỉnh lại từng bước để khách xem được quy trình dịch vụ rõ ràng.</small>
+              </div>
+              <button id="managerServiceAddStep" class="manager-service-add-step" type="button">+ Thêm bước</button>
+            </div>
+            <div id="managerServiceStepsEditor" class="manager-service-steps-editor"></div>
+          </div>
+          <label class="booking-note-row">
+            <span>Tải ảnh dịch vụ</span>
+            <div class="field manager-service-upload-field"><i>🖼</i><input id="managerServiceImage" type="file" accept="image/*" /></div>
+            <div class="manager-service-image-preview-wrap">
+              <img id="managerServiceImagePreview" src="assets/service-goi-duong-sinh.png" alt="Xem trước ảnh dịch vụ" />
+              <small>Ảnh này sẽ hiển thị trên thẻ dịch vụ và trong cửa sổ đặt lịch.</small>
+            </div>
+          </label>
+        </div>
+        <p id="managerServiceMessage" class="form-message"></p>
+        <div class="booking-form-actions manager-service-actions">
+          <button id="managerServiceCancel" class="ghost-btn" type="button">Đóng</button>
+          <button class="submit-btn" type="submit"><span id="managerServiceSubmitLabel">OK tạo dịch vụ</span> <span>→</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="vendor/jszip.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
