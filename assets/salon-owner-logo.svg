@@ -1,0 +1,28 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="86" y1="54" x2="438" y2="462" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8FA"/>
+      <stop offset="0.52" stop-color="#F4DCE4"/>
+      <stop offset="1" stop-color="#E9C5D1"/>
+    </linearGradient>
+    <linearGradient id="petal" x1="149" y1="124" x2="359" y2="374" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B66E86"/>
+      <stop offset="1" stop-color="#7E4358"/>
+    </linearGradient>
+    <filter id="shadow" x="44" y="44" width="424" height="424" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#7E4358" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+  <rect x="56" y="56" width="400" height="400" rx="128" fill="url(#bg)" filter="url(#shadow)"/>
+  <circle cx="256" cy="256" r="154" stroke="#C4869A" stroke-opacity="0.38" stroke-width="3"/>
+  <path d="M256 150C220 184 205 216 209 252C216 246 225 238 234 229C246 216 253 201 256 184C259 201 266 216 278 229C287 238 296 246 303 252C307 216 292 184 256 150Z" fill="url(#petal)"/>
+  <path d="M205 198C173 231 163 266 175 299C198 286 215 267 224 242C230 225 228 210 221 197C215 196 210 197 205 198Z" fill="#B8768B" fill-opacity="0.92"/>
+  <path d="M307 198C339 231 349 266 337 299C314 286 297 267 288 242C282 225 284 210 291 197C297 196 302 197 307 198Z" fill="#B8768B" fill-opacity="0.92"/>
+  <path d="M173 258C158 294 162 329 188 354C209 332 221 307 222 280C222 266 218 253 210 244C195 246 183 251 173 258Z" fill="#D09AA9"/>
+  <path d="M339 258C354 294 350 329 324 354C303 332 291 307 290 280C290 266 294 253 302 244C317 246 329 251 339 258Z" fill="#D09AA9"/>
+  <path d="M222 269C215 306 227 340 256 363C285 340 297 306 290 269C278 278 267 285 256 288C245 285 234 278 222 269Z" fill="#8B4A61"/>
+  <path d="M161 365C190 390 220 402 256 402C292 402 322 390 351 365" stroke="#8B4A61" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="132" cy="132" r="10" fill="#FFFFFF" fill-opacity="0.88"/>
+  <circle cx="391" cy="121" r="7" fill="#FFFFFF" fill-opacity="0.82"/>
+  <path d="M386 354L391 367L404 372L391 377L386 390L381 377L368 372L381 367L386 354Z" fill="#A45F77"/>
+</svg>
